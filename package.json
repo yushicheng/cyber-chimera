@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "cyber-chimera",
+  "description": "电子奇美拉的开发工具生态",
+  "scripts": {
+    "dev": "lerna run dev --parallel",
+    "build": "lerna run build --scope=\"chimera-dev-template\"",
+    "lib:build": "lerna run build:dist",
+    "lib:watch": "lerna run build:watch",
+    "sub:pull": "sh ./scripts/examples-pull.sh",
+    "sub:push": "sh ./scripts/examples-push.sh",
+    "project:pull": "sh ./scripts/project-pull.sh"
+  },
+  "workspaces": [
+    "example/*",
+    "packages/*"
+  ],
+  "devDependencies": {}
+}
