@@ -1,4 +1,4 @@
-const render=require("./render");
+const devRender=require("./devRender");
 
 /**
  * @description 开发的时候服务端渲染的逻辑可以在这里调试
@@ -11,8 +11,9 @@ const html_template=(`
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Document</title>
+    <link rel="shortcut icon" href="/public/favicon.ico">
     <script defer src="/main.js"></script>
     <link href="/main.css" rel="stylesheet">
   </head>
@@ -23,5 +24,5 @@ const html_template=(`
 `);
 
 module.exports=function server_callback(app){
-  app.use(render(html_template));
+  app.use(devRender(html_template));
 };
