@@ -12,7 +12,7 @@ module.exports={
   proxy:require("./configs/proxy_middleware"),
   devServer:{
     port:8200,
-    open:false,
+    open:true,
     history_api_fallback:false,
     server_callback:path.resolve(__dirname,"./server/dev")
   }

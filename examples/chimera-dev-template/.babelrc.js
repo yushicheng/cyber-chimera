@@ -7,6 +7,10 @@ module.exports={
     ["@babel/preset-typescript"]
   ],
   plugins:[
-    ["@babel/plugin-transform-runtime"]
+    ["@babel/plugin-transform-runtime"],
+    ["import",{
+      "style":true,
+      "libraryName":"antd"
+    }]
   ]
 };
