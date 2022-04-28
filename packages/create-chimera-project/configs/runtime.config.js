@@ -3,6 +3,6 @@
 module.exports = [{
   name:"chimera-dev-template",
   value:{
-    remote: "https://github.com/realstarvision/vision-ssr-template"
+    remote: "https://github.com/legacy-scaffold/chimera-dev-template"
   }
 }];
