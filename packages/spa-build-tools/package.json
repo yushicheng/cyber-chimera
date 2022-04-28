@@ -6,7 +6,7 @@
   "scripts": {
     "build:dist": "babel src --out-dir=dist",
     "build:watch": "babel src --out-dir=dist --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build:dist"
   },
   "publishConfig": {
     "access": "public"
@@ -79,5 +79,6 @@
   "peerDependencies": {
     "express": "^4.x"
   },
-  "bin": "./.bin/index.js"
+  "bin": "./.bin/index.js",
+  "gitHead": "43978b74990fa246925116ee6b6ae598dcc3d3b7"
 }

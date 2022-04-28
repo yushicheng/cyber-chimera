@@ -29,5 +29,6 @@
     "prompt": "1.2.2",
     "winston": "3.6.0"
   },
-  "bin": "./.bin/index.js"
+  "bin": "./.bin/index.js",
+  "gitHead": "43978b74990fa246925116ee6b6ae598dcc3d3b7"
 }
