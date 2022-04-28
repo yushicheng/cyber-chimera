@@ -1,14 +1,14 @@
 /* eslint-disable import/no-dynamic-require */
 const path=require("path");
-const decache=require("decache");
+const child_process=require("child_process");
 const {match}=require("path-to-regexp");
 
 const match_function=match("/:language/:pathname?");
+const server_file_path=path.join(process.cwd(),"./assets/server.js");
 
+/** 开发环境服务端渲染 **/
 module.exports=(html_template)=>{
-  return function (request,response,next){
-    decache("../assets/server");
-    const {server_render}=require("../assets/server");
+  return async function (request,response,next){
     const {path:request_path}=request;
     const extname=path.extname(request_path);
     if(extname){
@@ -24,12 +24,11 @@ module.exports=(html_template)=>{
     if(!["zh","en"].includes(params.language)){
       return response.redirect(301,"/zh");
     }
-    const render_content=server_render({
-      html_template,
-      location:request_path,
-      language:params.language
+    const render_content=await new Promise((resolve)=>{
+      const sub_node=child_process.fork(server_file_path);
+      sub_node.send({html_template,location:request_path,language:params.language});
+      sub_node.on("message",resolve);
     });
     response.send(render_content);
-    decache("../assets/server");
   }
 }

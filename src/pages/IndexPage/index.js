@@ -30,6 +30,7 @@ export default function IndexPage(){
     <div>
       <img className={css.image} src={image} alt="" />
       <div>{t("多语言切换测试")}</div>
+      <div>asdassadas</div>
       <button type="button" onClick={handleChangeChinese}>{t("Chinese")}</button>
       <button type="button" onClick={handleChangeEnglish}>{t("English")}</button>
       <Outlet />

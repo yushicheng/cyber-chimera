@@ -6,10 +6,10 @@ module.exports={
   hash:true,
   output_path:path.resolve(__dirname,"./assets/"),
   title:"My Server App",
-  client_template:path.resolve(__dirname,"./public/client.template.js"),
-  server_template:path.resolve(__dirname,"./public/server.template.js"),
+  client_template:path.resolve(__dirname,"./configs/client.template.js"),
+  server_template:path.resolve(__dirname,"./configs/server.template.js"),
   define:{},
-  proxy:require("./configs/proxy"),
+  proxy:require("./configs/proxy_middleware"),
   devServer:{
     port:8200,
     open:false,
