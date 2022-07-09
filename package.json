@@ -4,7 +4,10 @@
   "description": "电子奇美拉的开发工具生态",
   "scripts": {
     "dev": "lerna run dev --parallel",
-    "build": "lerna run build --scope=\"chimera-dev-template\"",
+    "build:test": "lerna run build:test --scope=\"chimera-dev-template\"",
+    "server:test": "lerna run server:test --scope=\"chimera-dev-template\"",
+    "build:prod": "lerna run build:prod --scope=\"chimera-dev-template\"",
+    "server:prod": "lerna run server:prod --scope=\"chimera-dev-template\"",
     "lib:build": "lerna run build:dist",
     "lib:watch": "lerna run build:watch",
     "sub:pull": "sh ./scripts/examples-pull.sh",
