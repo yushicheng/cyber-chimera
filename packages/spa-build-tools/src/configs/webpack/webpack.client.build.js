@@ -31,13 +31,11 @@ export default function get_webpack_client_build_config({ hash, define, copy, ou
         ...css_loader_config({ isServer: false }),
         ...less_loader_config({ isServer: false }),
         ...scss_loader_config({ isServer: false }),
-        ...file_loader_config({ isServer: false, hash })
+        ...file_loader_config({ isServer: false })
       ]
     },
     plugins: [
-      new WebpackCopyPlugin({
-        patterns: [{ from: "public", to: path.resolve(output_path, "./public") }].concat(copy)
-      }),
+      copy ? new WebpackCopyPlugin({ patterns: copy }) : null,
       new webpack.HotModuleReplacementPlugin(),
       new MiniCssExtractPlugin({
         linkType: "text/css",
@@ -46,8 +44,9 @@ export default function get_webpack_client_build_config({ hash, define, copy, ou
       new HtmlWebpackPlugin({
         title,
         filename: "index.html",
+        favicon: "./public/favicon.ico",
         template: path.resolve(process.cwd(), "./src/index.html")
       })
-    ]
+    ].filter(Boolean)
   })
 };

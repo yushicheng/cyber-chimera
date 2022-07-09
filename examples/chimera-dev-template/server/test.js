@@ -14,9 +14,8 @@ const render_with_function = require("./utils/render_with_function");
   const html_template_path = path.resolve(__dirname, "../assets/index.html");
   const html_template = await promisify(fs.readFile)(html_template_path, "utf-8");
   app.use(cookieParser());
-  app.use("/public/", express.static(path.resolve(__dirname, "../assets/public/")));
-  app.use("/test-website/", express.static(path.resolve(__dirname, "../assets/")));
-  app.use([prefix, auth], async (request, response) => {
+  app.use("/test-website", express.static(path.resolve(__dirname, "../assets/"), { index: false }));
+  app.use([auth, prefix], async (request, response) => {
     if (request.prefix !== "test-website") {
       return response.redirect(301, "/test-website/zh/");
     }

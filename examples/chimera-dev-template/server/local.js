@@ -18,29 +18,7 @@ module.exports = function server_callback(app) {
     const render_html = await render_with_process({
       location: request.path,
       language: request.language,
-      dev_inject: {
-        /** 登录页初始值 **/
-        login_initial_values: {
-          username: "test_user001",
-          password: "123456"
-        },
-        /** 注册页初始值 **/
-        registry_initial_values: {
-          username: "test_user001",
-          password: "123456",
-          e_mail: "1542874601@qq.com"
-        },
-        /** 广告位表单初始值 **/
-        position_initial_values: {
-          subject_detail_page: ["homepage"],
-          calculate_type: "DAY",
-          calculate_value: 1,
-          position_value: "PAGE_TOP",
-          content_type: "IMAGE",
-          resource_type: "OSS_URL",
-          resource_link: "https://ewr1.vultrobjects.com/test-bucket-002/4ba4e20401b8bdc4845ea6ecfa02e8ba.jpeg"
-        }
-      },
+      dev_inject: {},
       html_template: `
         <!DOCTYPE html>
         <html lang="en">
@@ -48,7 +26,7 @@ module.exports = function server_callback(app) {
           <meta charset="UTF-8">
           <meta http-equiv="X-UA-Compatible" content="IE=edge">
           <title>Document</title>
-          <link rel="shortcut icon" href="/public/favicon.ico">
+          <link rel="shortcut icon" href="${jsonWebpackStats.publicPath}public/favicon.ico">
           <script defer src="${jsonWebpackStats.publicPath}main.js"></script>
           <link href="${jsonWebpackStats.publicPath}main.css" rel="stylesheet">
         </head>
