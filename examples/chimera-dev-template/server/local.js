@@ -9,7 +9,7 @@ const render_dev_html = require("./utils/render_dev_html");
 const render_with_process = require("./utils/render_with_process");
 
 module.exports = function server_callback(app) {
-  app.use("/public", express.static(path.resolve(__dirname, "../assets/"), { index: false }));
+  app.use("/public", express.static(path.resolve(__dirname, "../public/"), { index: false }));
   app.use(cookieParser());
   app.use([auth, prefix]);
   app.use("/zh", async (request, response, next) => {
