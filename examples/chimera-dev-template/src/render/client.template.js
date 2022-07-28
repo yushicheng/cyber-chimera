@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "development") {
   const initial_value = window.initial_value;
   ReactDOM.hydrate((
     <I18nextProvider i18n={init18n(window.language)}>
-      <BrowserRouter basename={`/${window.language}`}>
+      <BrowserRouter basename={window.language}>
         <RenderContextProvider initial_value={initial_value}>
           <MainBlock />
         </RenderContextProvider>

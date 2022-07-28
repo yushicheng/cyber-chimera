@@ -2,7 +2,6 @@ import path from "path";
 import webpack from "webpack";
 import { merge } from "webpack-merge";
 import WebpackCopyPlugin from "copy-webpack-plugin";
-import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 import create_webpack_basic_config from "@/configs/webpack/webpack.basic";
@@ -40,12 +39,6 @@ export default function get_webpack_client_build_config({ hash, define, copy, ou
       new MiniCssExtractPlugin({
         linkType: "text/css",
         filename: `[name]${hash ? ".[contenthash]" : ""}.css`
-      }),
-      new HtmlWebpackPlugin({
-        title,
-        filename: "index.html",
-        favicon: "./public/favicon.ico",
-        template: path.resolve(process.cwd(), "./src/index.html")
       })
     ].filter(Boolean)
   })

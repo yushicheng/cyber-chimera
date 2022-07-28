@@ -9,8 +9,17 @@ import init18n from "@/init18n";
 import MainBlock from "@/entry";
 import { RenderContextProvider } from "./render_context";
 
-export async function server_render({ html_template, language, location, dev_inject, initial_value }) {
+export async function server_render({ title, keywords, description, html_template, language, location, dev_inject, initial_value }) {
   const $ = cheerio.load(html_template);
+  if (description) {
+    $("head").prepend(`<meta name="description" content="${description}">`);
+  };
+  if (keywords) {
+    $("head").prepend(`<meta name="keywords" content="${keywords}">`);
+  };
+  if (title) {
+    $("head").prepend(`<title>${title}</title>`);
+  };
   /** 多语言注水 **/
   if (language) {
     $("head").append(`<script>window.language="${language}"</script>`);

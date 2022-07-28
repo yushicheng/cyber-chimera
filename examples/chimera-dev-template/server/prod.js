@@ -1,18 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const fs = require("fs");
 const path = require("path");
 const express = require("express");
-const { promisify } = require("util");
 const cookieParser = require("cookie-parser");
 
 const auth = require("./middlewares/auth");
 const prefix = require("./middlewares/prefix");
+const render_build_html = require("./utils/render_build_html");
 const render_with_function = require("./utils/render_with_function");
 
 (async () => {
   const app = express();
-  const html_template_path = path.resolve(__dirname, "../assets/index.html");
-  const html_template = await promisify(fs.readFile)(html_template_path, "utf-8");
   app.use("/public", express.static(path.resolve(__dirname, "../assets/"), { index: false }));
   app.use(cookieParser());
   app.use([auth, prefix]);
@@ -23,9 +20,12 @@ const render_with_function = require("./utils/render_with_function");
   app.use(async (request, response) => {
     const render_html = await render_with_function({
       dev_inject: {},
-      html_template,
       location: request.path,
       language: request.language,
+      title: request.title || "测试标题",
+      keywords: request.keywords || "keyword1, keyword2, keyword3",
+      description: request.description || "这是本路径的描述文字",
+      html_template: render_build_html(),
       initial_value: request.initial_value,
     });
     response.send(render_html);

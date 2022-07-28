@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 const auth = require("./middlewares/auth");
 const prefix = require("./middlewares/prefix");
 const { sub_with_file } = require("./utils/fork_data");
-const dev_render_html = require("./utils/dev_render_html");
+const render_dev_html = require("./utils/render_dev_html");
 const render_with_process = require("./utils/render_with_process");
 
 module.exports = function server_callback(app) {
@@ -24,8 +24,11 @@ module.exports = function server_callback(app) {
       dev_inject: {},
       location: request.path,
       language: request.language,
+      title: request.title || "测试标题",
+      keywords: request.keywords || "keyword1, keyword2, keyword3",
+      description: request.description || "这是本路径的描述文字",
       initial_value: request.initial_value,
-      html_template: dev_render_html(jsonWebpackStats),
+      html_template: render_dev_html(jsonWebpackStats),
     });
     response.send(render_html);
   });

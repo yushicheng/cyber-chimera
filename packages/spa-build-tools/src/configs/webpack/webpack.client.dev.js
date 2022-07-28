@@ -1,7 +1,6 @@
 import path from "path";
 import webpack from "webpack";
 import { merge } from "webpack-merge";
-import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 import create_webpack_basic_config from "@/configs/webpack/webpack.basic";
@@ -41,12 +40,6 @@ export default function get_webpack_client_dev_config({ title, define, output_pa
       new MiniCssExtractPlugin({
         linkType: "text/css",
         filename: "[name].css"
-      }),
-      new HtmlWebpackPlugin({
-        title,
-        publicPath,
-        filename: "index.html",
-        template: path.resolve(process.cwd(), "./src/index.html")
       })
     ]
   })
