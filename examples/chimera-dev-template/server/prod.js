@@ -11,6 +11,7 @@ const render_with_function = require("./utils/render_with_function");
 (async () => {
   const app = express();
   app.use("/public", express.static(path.resolve(__dirname, "../assets/"), { index: false }));
+  app.use("/assets", express.static(path.resolve(__dirname, "../assets/"), { index: false }));
   app.use(cookieParser());
   app.use([auth, prefix]);
   app.use("/zh", async (request, response, next) => {

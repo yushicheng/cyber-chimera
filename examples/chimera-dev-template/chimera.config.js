@@ -3,7 +3,7 @@ const path = require("path");
 
 
 module.exports = {
-  hash: true,
+  hash: false,
   publicPath: "/",
   output_path: path.resolve(__dirname, "./assets/"),
   title: "My Server App",
