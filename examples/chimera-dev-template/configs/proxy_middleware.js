@@ -1,6 +1,7 @@
 
-module.exports={
-  "/api":{
-    target:"http://localhost:9000"
+module.exports = {
+  "/api": {
+    target: "http://localhost:9000",
+    changeOrigin: true
   }
 };

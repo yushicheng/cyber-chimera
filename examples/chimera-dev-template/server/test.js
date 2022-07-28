@@ -13,19 +13,20 @@ const render_with_function = require("./utils/render_with_function");
   const app = express();
   const html_template_path = path.resolve(__dirname, "../assets/index.html");
   const html_template = await promisify(fs.readFile)(html_template_path, "utf-8");
+  app.use("/public", express.static(path.resolve(__dirname, "../assets/"), { index: false }));
   app.use(cookieParser());
-  app.use("/test-website", express.static(path.resolve(__dirname, "../assets/"), { index: false }));
-  app.use([auth, prefix], async (request, response) => {
-    if (request.prefix !== "test-website") {
-      return response.redirect(301, "/test-website/zh/");
-    }
-    if (request.language !== "zh") {
-      return response.redirect(301, "/test-website/zh/");
-    }
+  app.use([auth, prefix]);
+  app.use("/zh", async (request, response, next) => {
+    request.initial_value = { a: "test" };
+    next();
+  });
+  app.use(async (request, response) => {
     const render_html = await render_with_function({
+      dev_inject: {},
       html_template,
       location: request.path,
       language: request.language,
+      initial_value: request.initial_value,
     });
     response.send(render_html);
   });

@@ -7,20 +7,29 @@ import { StaticRouter } from "react-router-dom/server";
 
 import init18n from "@/init18n";
 import MainBlock from "@/entry";
+import { RenderContextProvider } from "./render_context";
 
-
-export function server_render({ html_template, language, location, dev_inject }) {
+export async function server_render({ html_template, language, location, dev_inject, initial_value }) {
   const $ = cheerio.load(html_template);
-  /** 服务端注水数据 **/
-  $("head").append(`<script>window.language="${language}"</script>`);
+  /** 多语言注水 **/
+  if (language) {
+    $("head").append(`<script>window.language="${language}"</script>`);
+  };
+  /** 开发模式注水 **/
   if (dev_inject) {
     $("head").append(`<script>window.dev_inject=${JSON.stringify(dev_inject)}</script>`);
+  };
+  /** 初始值注水 **/
+  if (initial_value) {
+    $("head").append(`<script>window.initial_value=${JSON.stringify(initial_value)}</script>`);
   };
   /** 服务端渲染结构 **/
   $("#root").append(ReactDOM.renderToString(
     <I18nextProvider i18n={init18n(language)}>
-      <StaticRouter basename={`/test-website/${language}`} location={location}>
-        <MainBlock />
+      <StaticRouter basename={`/${language}`} location={location}>
+        <RenderContextProvider initial_value={initial_value}>
+          <MainBlock />
+        </RenderContextProvider>
       </StaticRouter>
     </I18nextProvider>
   ));
@@ -34,10 +43,14 @@ export function server_render({ html_template, language, location, dev_inject })
  * @see https://byvoid.com/zhs/blog/node-child-process-ipc/
  * **/
 if (process.env.NODE_ENV === "development") {
-  process.on("message", (message) => {
-    const { html_template, language, location, dev_inject } = message;
-    process.send(server_render({ html_template, language, location, dev_inject }));
-    process.exit(0);
+  process.on("message", async (message) => {
+    try {
+      const render_content = await server_render(message);
+      process.send(render_content);
+    } catch (error) {
+      console.log(error);
+      process.send(`<pre>${error.message}</pre>`);
+    }
   });
 };
 
