@@ -71,5 +71,8 @@
     "webpack-merge": "^5.8.0"
   },
   "bin": "./.bin/index.js",
-  "gitHead": "43978b74990fa246925116ee6b6ae598dcc3d3b7"
+  "gitHead": "43978b74990fa246925116ee6b6ae598dcc3d3b7",
+  "devDependencies": {
+    "webpackbar": "5.0.2"
+  }
 }

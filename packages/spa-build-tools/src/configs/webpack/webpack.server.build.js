@@ -1,4 +1,4 @@
-import path from "path";
+import WebpackBar from "webpackbar";
 import { merge } from "webpack-merge";
 
 import create_webpack_basic_config from "@/configs/webpack/webpack.basic";
@@ -31,6 +31,9 @@ export default function get_webpack_server_build_config({ title, define, output_
         ...scss_loader_config({ isServer: true }),
         ...file_loader_config({ isServer: true })
       ]
-    }
+    },
+    plugins: [
+      new WebpackBar({ name: "building-server" }),
+    ]
   })
 }

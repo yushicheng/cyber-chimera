@@ -1,5 +1,4 @@
-import path from "path";
-import webpack from "webpack";
+import WebpackBar from "webpackbar";
 import { merge } from "webpack-merge";
 import WebpackCopyPlugin from "copy-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
@@ -34,8 +33,8 @@ export default function get_webpack_client_build_config({ hash, define, copy, ou
       ]
     },
     plugins: [
+      new WebpackBar({ name: "building-client" }),
       copy ? new WebpackCopyPlugin({ patterns: copy }) : null,
-      new webpack.HotModuleReplacementPlugin(),
       new MiniCssExtractPlugin({
         linkType: "text/css",
         filename: `[name]${hash ? ".[contenthash]" : ""}.css`
