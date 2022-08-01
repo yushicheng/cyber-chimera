@@ -38,6 +38,6 @@ module.exports = async (context, next) => {
     context.response.body = render_html;
   } catch (error) {
     console.log(error);
-    context.response.body = error;
+    context.response.body = `<pre>${error.message}</pre>`;
   };
 };
