@@ -7,14 +7,6 @@ import init18n from "@/init18n";
 import MainBlock from "@/entry";
 import { RenderContextProvider } from "./render_context";
 
-if (process.env.NODE_ENV === "development") {
-  if (module.hot) {
-    module.hot.accept();
-    module.hot.dispose(function () {
-      console.log("module.hot.dispose");
-    });
-  }
-}
 
 (async () => {
   const initial_value = window.initial_value;

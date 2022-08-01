@@ -25,6 +25,7 @@
     "es6-promisify": "^6.1.1",
     "inquirer": "^7.3.3",
     "jsonfile": "^6.0.1",
+    "koa-proxies": "0.12.2",
     "module-alias": "^2.2.2",
     "prompt": "1.2.2",
     "winston": "3.6.0"

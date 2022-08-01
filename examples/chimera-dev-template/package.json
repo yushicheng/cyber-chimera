@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "spa-build-tools dev",
     "build:test": "spa-build-tools build",
-    "server:test": "node ./server/test.js",
+    "server:test": "node ./server/app.js",
     "server:test:stop": "pm2 stop ./server/test.js",
     "server:test:start": "pm2 start ./server/test.js",
     "server:test:delete": "pm2 delete ./server/test.js",
@@ -23,10 +23,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@koa/router": "12.0.0",
     "cheerio": "^1.0.0-rc.10",
     "classnames": "2.3.1",
     "dot-prop": "^7.2.0",
     "i18next": "^21.6.14",
+    "koa": "2.13.4",
+    "koa-cookie": "1.0.0",
+    "koa-proxies": "0.12.2",
+    "koa-static": "5.0.0",
     "path-to-regexp": "^6.2.0",
     "react": "16.14.0",
     "react-dom": "16.14.0",
@@ -36,8 +41,7 @@
     "ssr-window": "4.0.2"
   },
   "peerDependencies": {
-    "axios": "*",
-    "express": "^4.x"
+    "axios": "*"
   },
   "devDependencies": {
     "@cyber-chimera/spa-build-tools": "^2.2.0",
@@ -45,7 +49,6 @@
     "@typescript-eslint/parser": "5.19.0",
     "babel-eslint": "10.1.0",
     "babel-plugin-import": "1.13.5",
-    "cookie-parser": "1.4.6",
     "eslint": "6.8.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-prettier": "3.6.0",
@@ -55,7 +58,6 @@
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-react": "7.29.4",
     "eslint-plugin-react-hooks": "4.3.0",
-    "express-redirect": "1.2.2",
     "pm2": "5.2.0",
     "stylelint": "9.10.1",
     "stylelint-config-prettier": "4.0.0",

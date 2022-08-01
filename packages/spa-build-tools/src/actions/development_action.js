@@ -1,12 +1,9 @@
-import open from "open";
-import express from "express";
+import path from "path";
 import webpack from "webpack";
+import chokidar from "chokidar";
 import { Option } from "commander";
-
-import { createProxyMiddleware } from "http-proxy-middleware";
-import webpack_dev_middleware from "webpack-dev-middleware";
-import webpack_hot_middleware from "webpack-hot-middleware";
-import history_api_fallback from "connect-history-api-fallback";
+import { fork } from "child_process";
+import { EventEmitter } from "events";
 
 import get_webpack_server_dev_config from "@/configs/webpack/webpack.server.dev";
 import get_webpack_client_dev_config from "@/configs/webpack/webpack.client.dev";
@@ -15,33 +12,48 @@ import get_computed_config from "@/utils/get_computed_config";
 export const runtime_config_option = new Option("-c,--config <string>").default("./chimera.config.js");
 
 export async function development_action() {
-  const app = express();
-  const { devServer, ...other_config } = await get_computed_config();
+  const { server_process, ...other_config } = await get_computed_config();
+
+  const compiler_events = new EventEmitter();
+
+  const fork_task = [];
 
   const server_dev_compiler = webpack(get_webpack_server_dev_config(other_config));
   const client_dev_compiler = webpack(get_webpack_client_dev_config(other_config));
 
-  await new Promise((resolve, reject) => server_dev_compiler.watch({}, (error, stats) => error ? reject(error) : resolve(stats)));
+  server_dev_compiler.watch({}, (error, stats) => {
+    if (error) {
+      console.log(error)
+    } else {
+      console.log(stats.toString({ colors: true }));
+      compiler_events.emit("complate");
+    }
+  });
 
-  if (other_config.proxy) {
-    Object.keys(other_config.proxy).forEach((proxy_rule) => {
-      app.use(proxy_rule, createProxyMiddleware(other_config.proxy[proxy_rule]));
-    });
-  };
-
-  app.use(webpack_hot_middleware(client_dev_compiler, { reload: true }));
-  app.use(webpack_dev_middleware(client_dev_compiler, { serverSideRender: true }));
-
-  await require(devServer.server_callback)(app);
-
-  if (devServer.history_api_fallback) {
-    app.use(history_api_fallback())
-  }
-
-  const listen = app.listen(devServer.port, async () => {
-    if (devServer.open) {
-      const { port } = listen.address();
-      await open(`http://localhost:${port}`);
+  client_dev_compiler.watch({}, (error, stats) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(stats.toString({ colors: true }));
+      compiler_events.emit("complate");
     };
   });
+
+  compiler_events.on("complate", () => {
+    fork_task.forEach((current_fork) => current_fork.kill());
+    fork_task.push(fork(server_process));
+  });
+
+  chokidar.watch(process.cwd(), {
+    ignored: [
+      path.resolve(process.cwd(), "./assets/"),
+      path.resolve(process.cwd(), "./node_modules/")
+    ],
+    ignoreInitial: true,
+    persistent: true
+  }).on("all", () => {
+    fork_task.forEach((current_fork) => current_fork.kill());
+    fork_task.push(fork(server_process));
+  });
+
 };

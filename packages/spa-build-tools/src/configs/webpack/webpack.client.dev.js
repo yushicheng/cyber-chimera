@@ -18,10 +18,7 @@ export default function get_webpack_client_dev_config({ title, define, output_pa
     },
   }), {
     mode: "development",
-    entry: [
-      "webpack-hot-middleware/client",
-      client_template
-    ],
+    entry: [client_template],
     output: {
       publicPath,
       path: output_path,
@@ -36,7 +33,7 @@ export default function get_webpack_client_dev_config({ title, define, output_pa
       ]
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
+      // new webpack.HotModuleReplacementPlugin(),
       new MiniCssExtractPlugin({
         linkType: "text/css",
         filename: "[name].css"
