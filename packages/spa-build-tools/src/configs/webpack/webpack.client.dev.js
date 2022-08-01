@@ -1,4 +1,4 @@
-import WebpackBar from "webpackbar";
+// import webpack from "webpack";
 import { merge } from "webpack-merge";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
@@ -32,7 +32,6 @@ export default function get_webpack_client_dev_config({ title, define, output_pa
       ]
     },
     plugins: [
-      new WebpackBar({ name: "client-render" }),
       new MiniCssExtractPlugin({
         linkType: "text/css",
         filename: "[name].css"
