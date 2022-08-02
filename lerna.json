@@ -12,7 +12,7 @@
     },
     "version": {
       "yes": true,
-      "private": false
+      "private": true
     },
     "bootstrap": {
       "ignore": []
