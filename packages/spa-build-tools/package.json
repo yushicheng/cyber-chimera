@@ -45,6 +45,7 @@
     "execa": "^4.0.3",
     "file-loader": "^6.2.0",
     "html-loader": "^3.1.0",
+    "html-webpack-plugin": "5.5.0",
     "inquirer": "^7.3.3",
     "jsonfile": "^6.0.1",
     "koa-proxies": "0.12.2",

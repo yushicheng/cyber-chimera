@@ -2,7 +2,7 @@
 const path = require("path");
 
 module.exports = {
-  hash: false,
+  hash: true,
   publicPath: "/",
   output_path: path.resolve(__dirname, "./assets/"),
   title: "My Server App",
@@ -10,5 +10,5 @@ module.exports = {
   server_template: path.resolve(__dirname, "./src/render/server.template.js"),
   server_process: path.resolve(__dirname, "./server/app.js"),
   define: {},
-  bundle_analyzer: true
+  bundle_analyzer: false
 };

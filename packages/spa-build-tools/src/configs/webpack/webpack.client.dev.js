@@ -1,5 +1,7 @@
+import path from "path";
 import WebpackBar from "webpackbar";
 import { merge } from "webpack-merge";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 import create_webpack_basic_config from "@/configs/webpack/webpack.basic";
@@ -45,6 +47,9 @@ export default function get_webpack_client_dev_config({ title, define, output_pa
     plugins: [
       new WebpackBar({
         name: "client-render"
+      }),
+      new HtmlWebpackPlugin({
+        template: path.resolve(process.cwd(), "./public/index.html")
       }),
       new MiniCssExtractPlugin({
         linkType: "text/css",

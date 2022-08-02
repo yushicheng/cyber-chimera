@@ -1,7 +1,9 @@
+import path from "path";
 import WebpackBar from "webpackbar";
 import { merge } from "webpack-merge";
 import TerserPlugin from "terser-webpack-plugin";
 import WebpackCopyPlugin from "copy-webpack-plugin";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
@@ -54,6 +56,9 @@ export default function get_webpack_client_build_config({ hash, define, copy, ou
     },
     plugins: [
       new WebpackBar({ name: "building-client" }),
+      new HtmlWebpackPlugin({
+        template: path.resolve(process.cwd(), "./public/index.html")
+      }),
       bundle_analyzer ? new BundleAnalyzerPlugin({
         analyzerPort: "auto",
         generateStatsFile: true

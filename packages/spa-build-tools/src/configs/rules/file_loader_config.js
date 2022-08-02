@@ -7,7 +7,7 @@ export default ({ isServer }) => [{
     options: {
       emitFile: !isServer,
       outputPath: "files",
-      publicPath: "/assets/files/",
+      publicPath: "/files/",
       name: `[name][contenthash].[ext]`
     }
   }].filter(Boolean)
