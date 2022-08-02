@@ -1,5 +1,5 @@
 // import path from "path";
-// import webpack from "webpack"
+import WebpackBar from "webpackbar"
 import { merge } from "webpack-merge";
 
 import create_webpack_basic_config from "@/configs/webpack/webpack.basic";
@@ -33,6 +33,10 @@ export default function get_webpack_server_dev_config({ title, define, output_pa
         ...file_loader_config({ isServer: true })
       ]
     },
-    plugins: []
+    plugins: [
+      new WebpackBar({
+        name: "server-render"
+      })
+    ]
   })
 }

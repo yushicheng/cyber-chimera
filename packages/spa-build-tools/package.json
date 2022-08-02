@@ -68,14 +68,11 @@
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "5.3.3",
+    "webpack-bundle-analyzer": "4.5.0",
+    "webpackbar": "5.0.2",
     "webpack": "^5.70.0",
     "webpack-merge": "^5.8.0"
   },
   "bin": "./.bin/index.js",
-  "gitHead": "43978b74990fa246925116ee6b6ae598dcc3d3b7",
-  "devDependencies": {
-    "uglifyjs-webpack-plugin": "2.2.0",
-    "webpack-bundle-analyzer": "4.5.0",
-    "webpackbar": "5.0.2"
-  }
+  "gitHead": "43978b74990fa246925116ee6b6ae598dcc3d3b7"
 }
