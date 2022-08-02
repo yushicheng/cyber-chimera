@@ -1,5 +1,4 @@
 import { merge } from "webpack-merge";
-import { TerserPlugin } from "webpack";
 
 import create_webpack_basic_config from "@/configs/webpack/webpack.basic";
 import css_loader_config from "@/configs/rules/css_loader_config";
@@ -25,15 +24,7 @@ export default function get_webpack_server_build_config({ title, define, output_
       filename: "server.js"
     },
     optimization: {
-      minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          parallel: true, // 可省略，默认开启并行
-          terserOptions: {
-            toplevel: true, // 最高级别，删除无用代码
-          }
-        })
-      ]
+      minimize: true
     },
     module: {
       rules: [
