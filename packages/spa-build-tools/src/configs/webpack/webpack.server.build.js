@@ -1,3 +1,4 @@
+import WebpackBar from "webpackbar";
 import { merge } from "webpack-merge";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
@@ -36,6 +37,7 @@ export default function get_webpack_server_build_config({ bundle_analyzer, defin
       ]
     },
     plugins: [
+      new WebpackBar({ name: "building-client" }),
       bundle_analyzer ? new BundleAnalyzerPlugin({
         analyzerPort: "auto",
         generateStatsFile: true
