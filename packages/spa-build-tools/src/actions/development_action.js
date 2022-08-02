@@ -46,11 +46,10 @@ export async function development_action() {
     fork_task.push(fork(server_process));
   });
 
-  chokidar.watch(process.cwd(), {
-    ignored: [
-      path.resolve(process.cwd(), "./assets/"),
-      path.resolve(process.cwd(), "./node_modules/")
-    ],
+  chokidar.watch([
+    path.resolve(process.cwd(), "./configs/"),
+    path.resolve(process.cwd(), "./server/")
+  ], {
     ignoreInitial: true,
     persistent: true
   }).on("all", () => {

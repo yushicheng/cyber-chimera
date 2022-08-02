@@ -1,5 +1,5 @@
-// import webpack from "webpack";
 import { merge } from "webpack-merge";
+import { TerserPlugin } from "webpack";
 import WebpackCopyPlugin from "copy-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
@@ -23,6 +23,17 @@ export default function get_webpack_client_build_config({ hash, define, copy, ou
       publicPath: publicPath,
       path: output_path,
       filename: `[name]${hash ? ".[contenthash]" : ""}.js`
+    },
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          parallel: true, // 可省略，默认开启并行
+          terserOptions: {
+            toplevel: true, // 最高级别，删除无用代码
+          }
+        })
+      ]
     },
     module: {
       rules: [

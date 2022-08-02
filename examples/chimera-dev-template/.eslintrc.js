@@ -2,7 +2,7 @@
 
 module.exports = {
   parser: "@typescript-eslint/parser",
-  extends: ["airbnb","prettier","plugin:@typescript-eslint/recommended","plugin:react-hooks/recommended"],
+  extends: ["airbnb", "prettier", "plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended"],
   env: {
     browser: true,
     node: true,
@@ -28,7 +28,7 @@ module.exports = {
     "react/forbid-prop-types": 0,
     "react/jsx-one-expression-per-line": 0,
     "import/no-unresolved": [2, { ignore: ["^@/", "^umi/"] }],
-    "import/no-extraneous-dependencies": [2,{
+    "import/no-extraneous-dependencies": [2, {
       optionalDependencies: true,
       devDependencies: ["**/tests/**.js", "/mock/**.js", "**/**.test.js"],
     }],
@@ -37,18 +37,18 @@ module.exports = {
     "jsx-a11y/no-static-element-interactions": 0,
     "jsx-a11y/anchor-is-valid": 0,
     "linebreak-style": 0,
-    "no-unused-expressions": ["error",{"allowShortCircuit":true}],
+    "no-unused-expressions": ["error", { "allowShortCircuit": true }],
     "no-underscore-dangle": 0,
     "import/prefer-default-export": 0,
     "react/jsx-closing-tag-location": 0,
     "no-console": 0,
-    "no-shadow":0,
-    "react/jsx-indent":0,
-    "no-await-in-loop":0,
-    "react/jsx-indent-props":0,
+    "no-shadow": 0,
+    "react/jsx-indent": 0,
+    "no-await-in-loop": 0,
+    "react/jsx-indent-props": 0,
     "react/jsx-filename-extension": 0,
     "react/destructuring-assignment": 0,
-    "react/jsx-curly-brace-presence":0,
+    "react/jsx-curly-brace-presence": 0,
     "func-names": 0,
     "dot-notation": 0,
     "import/no-unresolved": 0,

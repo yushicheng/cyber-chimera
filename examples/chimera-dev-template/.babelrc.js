@@ -1,16 +1,16 @@
 /* eslint-disable */
 
-module.exports={
-  presets:[
+module.exports = {
+  presets: [
     ["@babel/preset-env"],
     ["@babel/preset-react"],
     ["@babel/preset-typescript"]
   ],
-  plugins:[
+  plugins: [
     ["@babel/plugin-transform-runtime"],
-    ["import",{
-      "style":true,
-      "libraryName":"antd"
+    ["import", {
+      "style": true,
+      "libraryName": "antd"
     }]
   ]
 };
