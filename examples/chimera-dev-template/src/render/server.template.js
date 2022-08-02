@@ -46,23 +46,5 @@ export async function server_render({ title, keywords, description, html_templat
     </I18nextProvider>
   ));
   return $.html();
-}
-
-/**
- * 开发环境下使用父子进程通信的方式实现服务端渲染的热更新策略
- * 为什么不使用delete require.cache来实现热更新是因为会导致内存栈溢出,而子线程不会
- * 父子进程通信请参考这里
- * @see https://byvoid.com/zhs/blog/node-child-process-ipc/
- * **/
-if (process.env.NODE_ENV === "development") {
-  process.on("message", async (message) => {
-    try {
-      const render_content = await server_render(message);
-      process.send(render_content);
-    } catch (error) {
-      console.log(error);
-      process.send(`<pre>${error.message}</pre>`);
-    }
-  });
 };
 
