@@ -10,7 +10,7 @@ module.exports = async () => {
   const render_template = await promisify(fs.readFile)(html_template_path, "utf-8");
   return async (context, next) => {
     try {
-      const { API_TOKEN } = context.cookies;
+      const { API_TOKEN } = context.cookie;
       console.log("当前身份令牌==>", API_TOKEN);
       const return_values = await next();
       if (!return_values) {
