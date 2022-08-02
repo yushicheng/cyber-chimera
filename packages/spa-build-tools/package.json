@@ -75,6 +75,7 @@
   "gitHead": "43978b74990fa246925116ee6b6ae598dcc3d3b7",
   "devDependencies": {
     "uglifyjs-webpack-plugin": "2.2.0",
+    "webpack-bundle-analyzer": "4.5.0",
     "webpackbar": "5.0.2"
   }
 }

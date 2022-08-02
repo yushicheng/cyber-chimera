@@ -1,7 +1,8 @@
 import { merge } from "webpack-merge";
-import WebpackCopyPlugin from "copy-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
+import WebpackCopyPlugin from "copy-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 import create_webpack_basic_config from "@/configs/webpack/webpack.basic";
 import css_loader_config from "@/configs/rules/css_loader_config";
@@ -9,7 +10,7 @@ import less_loader_config from "@/configs/rules/less_loader_config";
 import scss_loader_config from "@/configs/rules/scss_loader_config";
 import file_loader_config from "@/configs/rules/file_loader_config";
 
-export default function get_webpack_client_build_config({ hash, define, copy, output_path, publicPath, title, client_template }) {
+export default function get_webpack_client_build_config({ hash, define, copy, output_path, publicPath, bundle_analyzer, client_template }) {
   return merge(create_webpack_basic_config({
     define: {
       "process.env.isServer": false,
@@ -42,6 +43,10 @@ export default function get_webpack_client_build_config({ hash, define, copy, ou
       ]
     },
     plugins: [
+      bundle_analyzer ? new BundleAnalyzerPlugin({
+        analyzerPort: "auto",
+        generateStatsFile: true
+      }) : null,
       copy ? new WebpackCopyPlugin({ patterns: copy }) : null,
       new MiniCssExtractPlugin({
         linkType: "text/css",

@@ -9,8 +9,5 @@ module.exports = {
   server_template: path.resolve(__dirname, "../template/server.template.js"),
   define: {},
   proxy: {},
-  devServer: {
-    open: true,
-    historyApiFallback: true
-  },
+  bundle_analyzer: false
 };

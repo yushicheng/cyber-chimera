@@ -10,4 +10,5 @@ module.exports = {
   server_template: path.resolve(__dirname, "./src/render/server.template.js"),
   server_process: path.resolve(__dirname, "./server/app.js"),
   define: {},
+  bundle_analyzer: true
 };
