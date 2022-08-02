@@ -26,6 +26,15 @@ export default function get_webpack_client_build_config({ hash, define, copy, ou
       filename: `[name]${hash ? ".[contenthash]" : ""}.js`
     },
     optimization: {
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all'
+          }
+        }
+      },
       minimize: true,
       minimizer: [
         new TerserPlugin({

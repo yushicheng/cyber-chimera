@@ -21,7 +21,6 @@ export async function development_action() {
   const server_dev_compiler = webpack(get_webpack_server_dev_config(other_config));
   const client_dev_compiler = webpack(get_webpack_client_dev_config(other_config));
 
-  console.log("正在编译服务端...");
   server_dev_compiler.watch({}, (error, stats) => {
     if (error) {
       console.log(error)
@@ -31,7 +30,6 @@ export async function development_action() {
     }
   });
 
-  console.log("正在编译客户端...");
   client_dev_compiler.watch({}, (error, stats) => {
     if (error) {
       console.log(error);

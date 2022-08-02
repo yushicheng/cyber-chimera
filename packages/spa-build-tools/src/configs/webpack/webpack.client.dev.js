@@ -23,6 +23,17 @@ export default function get_webpack_client_dev_config({ title, define, output_pa
       path: output_path,
       filename: "[name].js"
     },
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all'
+          }
+        }
+      }
+    },
     module: {
       rules: [
         ...css_loader_config({ isServer: false }),
@@ -33,7 +44,7 @@ export default function get_webpack_client_dev_config({ title, define, output_pa
     },
     plugins: [
       new WebpackBar({
-        name: "server-render"
+        name: "client-render"
       }),
       new MiniCssExtractPlugin({
         linkType: "text/css",
