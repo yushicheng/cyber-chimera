@@ -24,9 +24,12 @@ module.exports = async () => {
           initial_value,
           location: context.path,
           html_template: render_template,
-          title: seo_option.title || "免版权视频素材下载",
-          keywords: seo_option.keywords || "免版权, 视频, 素材, 下载",
-          description: seo_option.description || "免版权高清视频素材下载",
+          seo_option: {
+            ...seo_option,
+            title: seo_option.title || "免版权视频素材下载",
+            keywords: seo_option.keywords || "免版权, 视频, 素材, 下载",
+            description: seo_option.description || "免版权高清视频素材下载",
+          }
         });
         context.response.status = 200;
         context.response.body = render_html;
@@ -39,9 +42,12 @@ module.exports = async () => {
           initial_value,
           location: context.path,
           html_template: render_template,
-          title: seo_option.title || "免版权视频素材下载",
-          keywords: seo_option.keywords || "免版权, 视频, 素材, 下载",
-          description: seo_option.description || "免版权高清视频素材下载",
+          seo_option: {
+            ...seo_option,
+            title: seo_option.title || "免版权视频素材下载",
+            keywords: seo_option.keywords || "免版权, 视频, 素材, 下载",
+            description: seo_option.description || "免版权高清视频素材下载",
+          }
         });
         context.response.status = 200;
         context.response.body = render_html;

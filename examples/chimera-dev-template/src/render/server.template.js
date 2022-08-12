@@ -9,16 +9,42 @@ import init18n from "@/init18n";
 import MainBlock from "@/entry";
 import { RenderContextProvider } from "./render_context";
 
-export async function server_render({ title, keywords, description, html_template, basename, language, location, dev_inject, initial_value }) {
+export async function server_render({ seo_option, html_template, basename, language, location, dev_inject, initial_value }) {
   const $ = cheerio.load(html_template);
-  if (description) {
-    $("head").prepend(`<meta name="description" content="${description}">`);
+  if (seo_option) {
+    $("head").append(`<script>window.seo_option=${JSON.stringify(seo_option)}</script>`);
   };
-  if (keywords) {
-    $("head").prepend(`<meta name="keywords" content="${keywords}">`);
+  if (seo_option.type === "video") {
+    $("head").attr("itemprop", "video");
+    $("head").attr("itemscope", "");
+    $("head").attr("itemtype", "http://schema.org/VideoObject");
+    $("head").prepend(`<meta property="og:type" content="video">`);
   };
-  if (title) {
-    $("head").prepend(`<title>${title}</title>`);
+  if (seo_option.description) {
+    $("head").prepend(`<meta itemprop="description" name="description" content="${seo_option.description}">`);
+  };
+  if (seo_option.keywords) {
+    $("head").prepend(`<meta itemprop="keywords" name="keywords" content="${seo_option.keywords}">`);
+  };
+  if (seo_option.author) {
+    $("head").prepend(`<meta itemprop="author" name="author" content="${seo_option.author}">`);
+  };
+  if (seo_option.thumbnailUrl) {
+    $("head").prepend(`<meta itemprop="thumbnailUrl" content="${seo_option.thumbnailUrl}">`);
+  };
+  if (seo_option.image) {
+    $("head").prepend(`<meta itemprop="image" content="${seo_option.image}">`);
+    $("head").prepend(`<meta property="og:image" content="${seo_option.image}">`);
+  };
+  if (seo_option.url) {
+    $("head").prepend(`<meta itemprop="url" content="${seo_option.url}">`);
+    $("head").prepend(`<meta property="og:url" content="${seo_option.url}">`);
+  };
+  if (seo_option.title) {
+    $("head").prepend(`<meta property="og:title" name="title" content="${seo_option.title}">`);
+    $("head").prepend(`<meta itemprop="title" name="title" content="${seo_option.title}">`);
+    $("head").prepend(`<meta itemprop="name" name="title" content="${seo_option.title}">`);
+    $("head").prepend(`<title>${seo_option.title}</title>`);
   };
   if (basename) {
     $("head").append(`<script>window.basename="${basename}"</script>`);
