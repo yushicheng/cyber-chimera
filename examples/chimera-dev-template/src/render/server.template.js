@@ -29,6 +29,12 @@ export async function server_render({ seo_option, html_template, basename, langu
   if (seo_option.author) {
     $("head").prepend(`<meta itemprop="author" name="author" content="${seo_option.author}">`);
   };
+  if (seo_option.uploadDate) {
+    $("head").prepend(`<meta itemprop="uploadDate" content="${seo_option.uploadDate}">`);
+  };
+  if (seo_option.contentUrl) {
+    $("head").prepend(`<meta itemprop="contentUrl" content="${seo_option.contentUrl}">`);
+  };
   if (seo_option.thumbnailUrl) {
     $("head").prepend(`<meta itemprop="thumbnailUrl" content="${seo_option.thumbnailUrl}">`);
   };
@@ -45,6 +51,7 @@ export async function server_render({ seo_option, html_template, basename, langu
     $("head").prepend(`<meta itemprop="title" name="title" content="${seo_option.title}">`);
     $("head").prepend(`<meta itemprop="name" name="title" content="${seo_option.title}">`);
     $("head").prepend(`<title>${seo_option.title}</title>`);
+    $("body").prepend(`<h1 style="display:none">${seo_option.title}</h1>`);
   };
   if (basename) {
     $("head").append(`<script>window.basename="${basename}"</script>`);
