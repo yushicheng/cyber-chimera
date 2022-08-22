@@ -37,7 +37,7 @@ export default function get_webpack_server_build_config({ bundle_analyzer, defin
       ]
     },
     plugins: [
-      new WebpackBar({ name: "building-client" }),
+      new WebpackBar({ name: "building-server" }),
       bundle_analyzer ? new BundleAnalyzerPlugin({
         analyzerPort: "auto",
         generateStatsFile: true
