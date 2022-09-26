@@ -23,9 +23,9 @@ module.exports = async () => {
         html_template: render_template,
         seo_option: {
           ...seo_option,
-          title: seo_option.title || "免版权视频素材下载",
-          keywords: seo_option.keywords || "免版权, 视频, 素材, 下载",
-          description: seo_option.description || "免版权高清视频素材下载",
+          title: seo_option.title || "chimera-project",
+          keywords: seo_option.keywords || "cyber,chimera,project,",
+          description: seo_option.description || "this is chimera-project",
         }
       });
       context.response.status = 200;
