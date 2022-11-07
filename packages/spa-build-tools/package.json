@@ -73,7 +73,7 @@
     "webpackbar": "5.0.2"
   },
   "bin": "./.bin/index.js",
-  "gitHead": "fbd086060e688c27dacc42181f7d889b817fdf2c",
+  "gitHead": "842276f429b4754e56a42440e0eadd75099b7802",
   "devDependencies": {
     "sass": "1.54.2"
   }
