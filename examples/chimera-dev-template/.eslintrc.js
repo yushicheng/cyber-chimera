@@ -1,24 +1,19 @@
-/* eslint-disable */
-
 module.exports = {
-  parser: "@typescript-eslint/parser",
-  extends: ["airbnb", "prettier", "plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended"],
+  parser: "@babel/eslint-parser",
+  extends: [
+    "airbnb",
+    "prettier",
+    "plugin:react-hooks/recommended"
+  ],
   env: {
     browser: true,
     node: true,
-    es6: true,
-    mocha: true,
-    jest: true,
-    jasmine: true,
+    es6: true
   },
   plugins: [
     "react",
     "react-hooks",
-    "@typescript-eslint"
   ],
-  globals: {
-    page: true,
-  },
   rules: {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
