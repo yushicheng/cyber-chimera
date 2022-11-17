@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 
 enum algorithms_status {
   RunningOnOribit,

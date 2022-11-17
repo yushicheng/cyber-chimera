@@ -1,11 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const Koa = require("koa");
 const proxy = require("koa-proxies");
-const static = require("koa-static");
+const koa_static = require("koa-static");
 const cookieParser = require("koa-cookie");
 
 const render = require("./middlewares/render");
 const index_page = require("./routers/index_page");
+const proxy_list = require("../configs/proxy_list");
 
 const static_cache_config = {
   "local": 0,
@@ -16,22 +17,19 @@ const static_cache_config = {
 (async () => {
   const app = new Koa();
 
-  app.use(static("./assets/", {
+  app.use(koa_static("./assets/", {
     index: false,
     maxage: static_cache_config[process.env.CHIMERA_RUNTIME]
   }));
 
-  app.use(static("./public/", {
+  app.use(koa_static("./public/", {
     index: false,
     maxage: static_cache_config[process.env.CHIMERA_RUNTIME]
   }));
 
-  /** 本地开发模式需要代理 **/
+  /** 本地开发模式需要代理 * */
   if (process.env.CHIMERA_RUNTIME === "local") {
-    const proxy_list = require("../configs/proxy_list");
-    Object.keys(proxy_list).map((current_proxy_path) => {
-      app.use(proxy(current_proxy_path, proxy_list[current_proxy_path]))
-    });
+    Object.keys(proxy_list).map((current_proxy_path) => app.use(proxy(current_proxy_path, proxy_list[current_proxy_path])));
   };
 
   app.use(cookieParser.default());

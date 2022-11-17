@@ -41,12 +41,10 @@ module.exports = {
     "react/jsx-indent": 0,
     "no-await-in-loop": 0,
     "react/jsx-indent-props": 0,
-    "react/jsx-filename-extension": 0,
     "react/destructuring-assignment": 0,
     "react/jsx-curly-brace-presence": 0,
     "func-names": 0,
     "dot-notation": 0,
-    "import/no-unresolved": 0,
     "import/extensions": 0,
     "camelcase": "off"
   },

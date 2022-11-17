@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from "react";
 import { Outlet } from "react-router-dom";
@@ -10,7 +11,7 @@ import { Outlet } from "react-router-dom";
 export default function BasicLayout(props) {
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <Outlet></Outlet>
+      <Outlet />
     </div>
   )
 };

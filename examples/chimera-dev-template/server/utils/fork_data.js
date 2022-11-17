@@ -2,7 +2,7 @@ const { fork } = require("child_process");
 
 const task = [];
 
-/** 子线程加载文件创建订阅 **/
+/** 子线程加载文件创建订阅 * */
 exports.sub_with_file = async function sub_with_file(filepath, input_params) {
   const content = await new Promise((resolve) => {
     const sub_node = fork(filepath);
@@ -16,7 +16,7 @@ exports.sub_with_file = async function sub_with_file(filepath, input_params) {
   return content;
 };
 
-/** 开发模式下文件中发布计算结果 **/
+/** 开发模式下文件中发布计算结果 * */
 exports.publish = function publish(callback) {
   process.on("message", async (message) => {
     try {

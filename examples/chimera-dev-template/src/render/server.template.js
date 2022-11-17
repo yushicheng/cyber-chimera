@@ -56,19 +56,19 @@ export async function server_render({ seo_option, html_template, basename, langu
   if (basename) {
     $("head").append(`<script>window.basename="${basename}"</script>`);
   };
-  /** 多语言注水 **/
+  /** 多语言注水 * */
   if (language) {
     $("head").append(`<script>window.language="${language}"</script>`);
   };
-  /** 开发模式注水 **/
+  /** 开发模式注水 * */
   if (dev_inject) {
     $("head").append(`<script>window.dev_inject=${JSON.stringify(dev_inject)}</script>`);
   };
-  /** 初始值注水 **/
+  /** 初始值注水 * */
   if (initial_value) {
     $("head").append(`<script>window.initial_value=${JSON.stringify(initial_value)}</script>`);
   };
-  /** 服务端渲染结构 **/
+  /** 服务端渲染结构 * */
   $("#root").append(ReactDOM.renderToString(
     <I18nextProvider i18n={init18n(language)}>
       <StaticRouter basename={basename} location={location}>

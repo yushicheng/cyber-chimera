@@ -6,12 +6,10 @@ import IndexPage from "@/pages/IndexPage";
 
 import "@/global.less";
 
-export default () => {
-  return (
-    <Routes>
-      <Route path="/" element={(<BasicLayout />)}>
-        <Route path="/" element={(<IndexPage />)} />
-      </Route>
-    </Routes>
-  )
-};
+export default () => (
+  <Routes>
+    <Route path="/" element={(<BasicLayout />)}>
+      <Route path="/" element={(<IndexPage />)} />
+    </Route>
+  </Routes>
+);

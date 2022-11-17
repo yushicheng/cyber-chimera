@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
  * 
  * @description 将访问 DOM/BOM 的方法放在 useEffect/useLayoutEffect 中（服务端不会执行）, 避免服务端执行时报错
  * @link https://www.codingsky.com/doc/2021/11/18/289.html
- * **/
+ * * */
 
 export default function useResponsive() {
 
