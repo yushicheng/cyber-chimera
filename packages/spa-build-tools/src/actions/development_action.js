@@ -18,8 +18,11 @@ export async function development_action() {
 
   const fork_task = [];
 
-  const server_dev_compiler = webpack(get_webpack_server_dev_config(other_config));
-  const client_dev_compiler = webpack(get_webpack_client_dev_config(other_config));
+  const server_dev_config = get_webpack_server_dev_config(other_config);
+  const client_dev_config = get_webpack_client_dev_config(other_config);
+
+  const server_dev_compiler = webpack(server_dev_config);
+  const client_dev_compiler = webpack(client_dev_config);
 
   server_dev_compiler.watch({}, (error, stats) => {
     if (error) {

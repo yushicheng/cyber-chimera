@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
+import { Outlet } from "react-router-dom";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { Outlet } from "react-router-dom";
+
 // import {Outlet,Navigate,useLocation} from "react-router-dom";
 
 import useInitalValue from "@/hooks/useInitalValue";
@@ -9,7 +10,6 @@ import ShowResponsive from "@/components/ShowResponsive";
 
 import css from "./style.less";
 import image from "./v2-5c21be97780f6be9aeb5bb2d01ae2470_r.jpg";
-
 
 // import classnames from "classnames";
 // import propTypes from "prop-types";

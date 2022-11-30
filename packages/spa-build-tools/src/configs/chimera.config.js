@@ -9,5 +9,13 @@ module.exports = {
   server_template: path.resolve(__dirname, "../template/server.template.js"),
   define: {},
   proxy: {},
+  resolve: {
+    fallback: {
+      "url": require.resolve("url"),
+      "path": require.resolve("path-browserify"),
+      "crypto": require.resolve("crypto-browserify"),
+      "stream": require.resolve("stream-browserify")
+    }
+  },
   bundle_analyzer: false
 };

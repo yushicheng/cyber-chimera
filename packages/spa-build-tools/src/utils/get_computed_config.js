@@ -8,9 +8,9 @@ import defaultConfig from "@/configs/chimera.config";
  * **/
 export default async function get_computed_config(runtime_config_path) {
   const configFileResolve = require.resolve("./chimera.config.js", {
-    paths:[process.cwd(),path.resolve(__dirname, "../configs/")]
+    paths: [process.cwd(), path.resolve(__dirname, "../configs/")]
   });
   // delete require.cache[require.resolve(runtime_config_path)];
   const customerConfig = require(configFileResolve);
-  return deepExtend(defaultConfig,customerConfig);
+  return deepExtend(defaultConfig, customerConfig);
 };

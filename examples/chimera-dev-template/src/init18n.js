@@ -13,7 +13,7 @@ export default function init18n(current_lauguage) {
 
   /** 
    * passes i18n down to react-i18next 
-   * **/
+   * * */
   i18n.use(initReactI18next);
 
   i18n.init({

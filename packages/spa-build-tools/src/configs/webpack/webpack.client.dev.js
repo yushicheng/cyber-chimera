@@ -10,14 +10,14 @@ import less_loader_config from "@/configs/rules/less_loader_config";
 import scss_loader_config from "@/configs/rules/scss_loader_config";
 import file_loader_config from "@/configs/rules/file_loader_config";
 
-export default function get_webpack_client_dev_config({ title, define, output_path, publicPath, client_template }) {
+export default function get_webpack_client_dev_config({ title, define, resolve, output_path, publicPath, client_template }) {
   return merge(create_webpack_basic_config({
     define: {
       "process.env.isServer": false,
       "process.env.NODE_ENV": "development",
       ...define
     },
-  }), {
+  }), { resolve }, {
     mode: "development",
     entry: [client_template],
     output: {
