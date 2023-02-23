@@ -1,6 +1,6 @@
 {
   "name": "@cyber-chimera/spa-build-tools",
-  "version": "6.5.0",
+  "version": "7.0.0",
   "description": "电子奇美拉single-page-application开发工具",
   "main": "./dist/index.js",
   "scripts": {
@@ -34,8 +34,6 @@
     "@cyber-tools/cli-utils": "^1.0.5",
     "babel-loader": "^8.2.3",
     "babel-plugin-module-resolver": "^4.1.0",
-    "path-browserify": "1.0.1",
-    "stream-browserify": "3.0.0",
     "chokidar": "3.5.3",
     "commander": "^8.1.0",
     "connect-history-api-fallback": "^1.6.0",
@@ -57,6 +55,7 @@
     "mini-css-extract-plugin": "^1.6.2",
     "module-alias": "^2.2.2",
     "open": "8.4.0",
+    "path-browserify": "1.0.1",
     "path-exists": "^4.0.0",
     "postcss": "^8.4.11",
     "postcss-aspect-ratio-mini": "^1.1.0",
@@ -68,6 +67,7 @@
     "postcss-viewport-units": "^0.1.6",
     "remove": "0.1.5",
     "sass-loader": "^12.6.0",
+    "stream-browserify": "3.0.0",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "5.3.3",
     "webpack": "^5.70.0",
