@@ -34,6 +34,8 @@
     "@cyber-tools/cli-utils": "^1.0.5",
     "babel-loader": "^8.2.3",
     "babel-plugin-module-resolver": "^4.1.0",
+    "path-browserify": "1.0.1",
+    "stream-browserify": "3.0.0",
     "chokidar": "3.5.3",
     "commander": "^8.1.0",
     "connect-history-api-fallback": "^1.6.0",

@@ -6,26 +6,16 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env CHIMERA_RUNTIME=local spa-build-tools dev",
-    "build": "spa-build-tools build",
-    "restart:local": "cross-env ENV_VALUE=local pm2 restart ./server/app.js",
-    "delete:local": "cross-env ENV_VALUE=local pm2 delete ./server/app.js",
-    "start:local": "cross-env ENV_VALUE=local pm2 start ./server/app.js",
-    "stop:local": "cross-env ENV_VALUE=local pm2 stop ./server/app.js",
-    "build:test": "./scripts/build-test.sh",
-    "publish:test": "./scripts/publish-test.sh",
-    "start:test": "cross-env CHIMERA_RUNTIME=test pm2-runtime start ./server/app.js",
-    "build:prod": "./scripts/build-prod.sh",
-    "publish:prod": "./scripts/publish-prod.sh",
-    "start:prod": "cross-env CHIMERA_RUNTIME=prod pm2-runtime start ./server/app.js"
+    "build": "cross-env CHIMERA_RUNTIME=local spa-build-tools build",
+    "build:test": "cross-env CHIMERA_RUNTIME=test spa-build-tools build",
+    "build:prod": "cross-env CHIMERA_RUNTIME=prod spa-build-tools build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@koa/router": "12.0.0",
-    "cheerio": "^1.0.0-rc.10",
     "classnames": "2.3.1",
-    "crypto-browserify": "3.12.0",
     "dot-prop": "^7.2.0",
     "glob": "8.1.0",
     "i18next": "^21.6.14",
@@ -33,7 +23,6 @@
     "koa-cookie": "1.0.0",
     "koa-proxies": "0.12.2",
     "koa-static": "5.0.0",
-    "path-browserify": "1.0.1",
     "path-to-regexp": "^6.2.0",
     "react": "16.14.0",
     "react-dom": "16.14.0",
@@ -41,7 +30,6 @@
     "react-responsive": "^9.0.0-beta.6",
     "react-router-dom": "^6.2.2",
     "ssr-window": "4.0.2",
-    "stream-browserify": "3.0.0",
     "url": "0.11.0"
   },
   "peerDependencies": {

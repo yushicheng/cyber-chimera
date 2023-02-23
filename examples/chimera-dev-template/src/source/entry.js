@@ -6,6 +6,7 @@ import IndexPage from "@/source/pages/IndexPage";
 
 import "@/source/global.less";
 
+
 export default () => (
   <Routes>
     <Route path="/" element={(<BasicLayout />)}>
