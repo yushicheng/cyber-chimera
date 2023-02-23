@@ -1,7 +1,10 @@
+import fs from "fs";
 import path from "path";
 import webpack from "webpack";
 import chokidar from "chokidar";
+import { promisify } from "util";
 import { Option } from "commander";
+import { readFile } from "jsonfile";
 import { fork } from "child_process";
 import { EventEmitter } from "events";
 
@@ -12,17 +15,29 @@ import get_computed_config from "@/utils/get_computed_config";
 export const runtime_config_option = new Option("-c,--config <string>").default("./chimera.config.js");
 
 export async function development_action() {
-  const { server_process, ...other_config } = await get_computed_config();
+  const { ...other_config } = await get_computed_config();
+
+  const dev_output_path = path.join(process.cwd(), "./src/.temp/");
+
+  await promisify(fs.rm)(dev_output_path, { recursive: true });
 
   const compiler_events = new EventEmitter();
 
   const fork_task = [];
 
-  const server_dev_config = get_webpack_server_dev_config(other_config);
-  const client_dev_config = get_webpack_client_dev_config(other_config);
+  /** 合并出客户端的配置 **/
+  const client_dev_config = get_webpack_client_dev_config({ ...other_config, output_path: dev_output_path });
 
-  const server_dev_compiler = webpack(server_dev_config);
+  /** 先完成一次完整的客户端编译 **/
+  await promisify(webpack)(client_dev_config);
+  /** 编译完客户端之后读取mainfast.json **/
+  const manifest_content = await readFile(path.resolve(dev_output_path, "./manifest.json"));
+  /** 将mainfast.json作为环境变量传递给服务端 **/
+  const server_dev_config = get_webpack_server_dev_config({ ...other_config, output_path: dev_output_path, manifest_content });
+
+  /** 开启客户端和服务端的监听服务 **/
   const client_dev_compiler = webpack(client_dev_config);
+  const server_dev_compiler = webpack(server_dev_config);
 
   server_dev_compiler.watch({}, (error, stats) => {
     if (error) {
@@ -44,18 +59,18 @@ export async function development_action() {
 
   compiler_events.on("complate", () => {
     fork_task.forEach((current_fork) => current_fork.kill());
-    fork_task.push(fork(server_process));
+    fork_task.push(fork(path.join(dev_output_path, `./server.js`)));
   });
 
   chokidar.watch([
     path.resolve(process.cwd(), "./configs/"),
-    path.resolve(process.cwd(), "./server/")
+    path.resolve(process.cwd(), "./src/")
   ], {
     ignoreInitial: true,
     persistent: true
   }).on("all", () => {
     fork_task.forEach((current_fork) => current_fork.kill());
-    fork_task.push(fork(server_process));
+    fork_task.push(fork(path.join(dev_output_path, `./server.js`)));
   });
 
 };

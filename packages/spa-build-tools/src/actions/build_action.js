@@ -1,5 +1,7 @@
+import path from "path";
 import webpack from "webpack";
 import { promisify } from "util";
+import { readFile } from "jsonfile";
 
 import get_computed_config from "@/utils/get_computed_config";
 import get_webpack_server_build_config from "@/configs/webpack/webpack.server.build";
@@ -12,14 +14,13 @@ export async function build_action() {
 
   await remove_output_dir(computed_config);
 
-  console.log("正在编译服务端...");
-  const server_stats = promisify(webpack)(get_webpack_server_build_config(computed_config));
-
   console.log("正在编译客户端...");
-  const client_stats = promisify(webpack)(get_webpack_client_build_config(computed_config));
+  const client_stats = await promisify(webpack)(get_webpack_client_build_config(computed_config));
+  client_stats.toString({ colors: true });
+  /** 编译完客户端之后读取mainfast.json **/
+  const manifest_content = await readFile(path.resolve(computed_config.output_path, "./manifest.json"));
 
-  const compile_result = await Promise.all([server_stats, client_stats]);
-  compile_result.map((result_stats) => {
-    console.log(result_stats.toString({ colors: true }))
-  });
+  console.log("正在编译服务端...");
+  const server_stats = await promisify(webpack)(get_webpack_server_build_config({ ...computed_config, manifest_content }));
+  server_stats.toString({ colors: true });
 };

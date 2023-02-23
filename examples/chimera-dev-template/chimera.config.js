@@ -6,9 +6,8 @@ module.exports = {
   publicPath: "/",
   output_path: path.resolve(__dirname, "./assets/"),
   title: "My Server App",
-  client_template: path.resolve(__dirname, "./src/render/client.template.js"),
-  server_template: path.resolve(__dirname, "./src/render/server.template.js"),
-  server_process: path.resolve(__dirname, "./server/app.js"),
+  client_entry: path.resolve(__dirname, "./src/client/client.entry.js"),
+  server_entry: path.resolve(__dirname, "./src/server/server.entry.js"),
   define: {},
   bundle_analyzer: false
 };

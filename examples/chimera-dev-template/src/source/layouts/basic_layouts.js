@@ -8,6 +8,7 @@ import { Outlet } from "react-router-dom";
 // import css from "./style.scss";
 // import css from "./style.less";
 
+
 export default function BasicLayout(props) {
   return (
     <div style={{ width: "100%", height: "100%" }}>

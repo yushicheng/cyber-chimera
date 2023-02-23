@@ -1,5 +1,5 @@
-const Router = require("@koa/router");
-const get_initial_value = require("../services/get_initial_value");
+import Router from "@koa/router";
+import get_initial_value from "@/server/services/get_initial_value";
 
 const router = new Router();
 
@@ -8,4 +8,4 @@ router.get("/", async () => {
   return { initial_value };
 });
 
-module.exports = router.routes();
+export default router.routes();

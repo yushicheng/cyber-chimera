@@ -1,5 +1,4 @@
-/temp/
-/dist/
+**/.temp
 /assets/
 /node_modules/
 **/.DS_Store

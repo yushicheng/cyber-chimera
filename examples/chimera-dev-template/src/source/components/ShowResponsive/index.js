@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import css from "./style.scss";
 
-import useResponsive from "@/hooks/useResponsive";
+import useResponsive from "@/source/hooks/useResponsive";
 
 export default function ShowResponsive() {
   const { t } = useTranslation();

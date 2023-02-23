@@ -3,10 +3,10 @@ import ReactDOM from "react-dom";
 import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
 
-import init18n from "@/init18n";
-import MainBlock from "@/entry";
-import { RenderContextProvider } from "./render_context";
-
+import init18n from "@/source/init18n";
+import MainBlock from "@/source/entry";
+// import NoSSR from "@/source/components/NoSSR";
+import { RenderContextProvider } from "@/source/context/render_context";
 
 (async () => {
   const { initial_value } = window;
