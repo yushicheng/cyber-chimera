@@ -23,6 +23,7 @@ export default function get_webpack_client_build_config({ title, hash, define, r
     },
   }), { resolve }, {
     mode: "production",
+    devtool: false,
     entry: client_entry,
     output: {
       publicPath: publicPath,

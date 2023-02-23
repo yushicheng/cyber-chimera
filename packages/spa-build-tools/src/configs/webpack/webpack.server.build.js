@@ -21,6 +21,7 @@ export default function get_webpack_server_build_config({ title, bundle_analyzer
     }
   }), { resolve }, {
     target: "node",
+    devtool: false,
     mode: "production",
     entry: server_entry,
     output: {
