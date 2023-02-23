@@ -5,6 +5,7 @@ import chokidar from "chokidar";
 import { promisify } from "util";
 import { Option } from "commander";
 import { readFile } from "jsonfile";
+import pathExists from "path-exists";
 import { fork } from "child_process";
 import { EventEmitter } from "events";
 
@@ -17,9 +18,11 @@ export const runtime_config_option = new Option("-c,--config <string>").default(
 export async function development_action() {
   const { ...other_config } = await get_computed_config();
 
-  const dev_output_path = path.join(process.cwd(), "./src/.temp/");
+  const dev_output_path = path.join(process.cwd(), "./.temp/");
 
-  await promisify(fs.rm)(dev_output_path, { recursive: true });
+  if (await pathExists(dev_output_path)) {
+    await promisify(fs.rm)(dev_output_path, { recursive: true });
+  };
 
   const compiler_events = new EventEmitter();
 
@@ -62,10 +65,7 @@ export async function development_action() {
     fork_task.push(fork(path.join(dev_output_path, `./server.js`)));
   });
 
-  chokidar.watch([
-    path.resolve(process.cwd(), "./configs/"),
-    path.resolve(process.cwd(), "./src/")
-  ], {
+  chokidar.watch([path.resolve(process.cwd(), "./src/")], {
     ignoreInitial: true,
     persistent: true
   }).on("all", () => {
