@@ -26,6 +26,11 @@ export async function development_action() {
 
   const compiler_events = new EventEmitter();
 
+  compiler_events.on("server-complate", () => {
+    fork_task.forEach((current_fork) => current_fork.kill());
+    fork_task.push(fork(path.resolve(dev_output_path, `./server.js`)));
+  });
+
   const fork_task = [];
 
   /** 合并出客户端的配置 **/
@@ -47,6 +52,7 @@ export async function development_action() {
       console.log(error)
     } else {
       console.log(stats.toString({ colors: true }));
+      compiler_events.emit("server-complate");
     };
   });
 
