@@ -20,23 +20,27 @@ export async function runder_method(context, next) {
   } else {
     try {
       const return_values = await next();
-      const { language = "zh", seo_option = {}, initial_value } = return_values || {};
-      const render_html = await server_render({
-        language,
-        dev_inject: {},
-        basename: "/",
-        initial_value,
-        location: context.path,
-        seo_option: {
-          ...seo_option,
-          title: seo_option.title || "chimera-project",
-          keywords: seo_option.keywords || "cyber,chimera,project,",
-          description: seo_option.description || "this is chimera-project",
-        }
-      });
-      context.response.status = 200;
-      context.response.body = render_html;
-      return false;
+      if (return_values instanceof Function) {
+        await return_values();
+      } else {
+        const { language = "zh", seo_option = {}, initial_value } = return_values || {};
+        const render_html = await server_render({
+          language,
+          dev_inject: {},
+          basename: "/",
+          initial_value,
+          location: context.path,
+          seo_option: {
+            ...seo_option,
+            title: seo_option.title || "chimera-project",
+            keywords: seo_option.keywords || "cyber,chimera,project,",
+            description: seo_option.description || "this is chimera-project",
+          }
+        });
+        context.response.status = 200;
+        context.response.body = render_html;
+        return false;
+      };
     } catch (error) {
       console.log(error);
       context.response.body = `<pre>${error.message}</pre>`;
