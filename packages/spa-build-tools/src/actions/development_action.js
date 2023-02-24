@@ -64,7 +64,11 @@ export async function development_action() {
     };
   });
 
-  chokidar.watch([path.resolve(process.cwd(), "./src/server/")], {
+  chokidar.watch([
+    path.resolve(process.cwd(), "./src/client/"),
+    path.resolve(process.cwd(), "./src/server/"),
+    path.resolve(process.cwd(), "./src/source/")
+  ], {
     ignoreInitial: true,
     persistent: true
   }).on("all", () => {
