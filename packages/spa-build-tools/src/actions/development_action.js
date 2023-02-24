@@ -18,13 +18,22 @@ export const runtime_config_option = new Option("-c,--config <string>").default(
 export async function development_action() {
   const { ...other_config } = await get_computed_config();
 
-  const dev_output_path = path.join(process.cwd(), "./.temp/");
+  const dev_output_path = path.resolve(process.cwd(), "./.temp/");
 
   if (await pathExists(dev_output_path)) {
     await promisify(fs.rm)(dev_output_path, { recursive: true });
   };
 
   const compiler_events = new EventEmitter();
+
+  compiler_events.on("client-complate", () => {
+    fork_task.forEach((current_fork) => current_fork.killed ? void (0) : current_fork.kill());
+  });
+
+  compiler_events.on("server-complate", () => {
+    fork_task.forEach((current_fork) => current_fork.killed ? void (0) : current_fork.kill());
+    fork_task.push(fork(path.resolve(dev_output_path, `./server.js`)));
+  });
 
   const fork_task = [];
 
@@ -47,8 +56,8 @@ export async function development_action() {
       console.log(error)
     } else {
       console.log(stats.toString({ colors: true }));
-      compiler_events.emit("complate");
-    }
+      compiler_events.emit("server-complate");
+    };
   });
 
   client_dev_compiler.watch({}, (error, stats) => {
@@ -56,13 +65,8 @@ export async function development_action() {
       console.log(error);
     } else {
       console.log(stats.toString({ colors: true }));
-      compiler_events.emit("complate");
+      compiler_events.emit("client-complate");
     };
-  });
-
-  compiler_events.on("complate", () => {
-    fork_task.forEach((current_fork) => current_fork.kill());
-    fork_task.push(fork(path.join(dev_output_path, `./server.js`)));
   });
 
   chokidar.watch([path.resolve(process.cwd(), "./src/")], {
@@ -70,7 +74,7 @@ export async function development_action() {
     persistent: true
   }).on("all", () => {
     fork_task.forEach((current_fork) => current_fork.kill());
-    fork_task.push(fork(path.join(dev_output_path, `./server.js`)));
+    fork_task.push(fork(path.resolve(dev_output_path, `./server.js`)));
   });
 
 };

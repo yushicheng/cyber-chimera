@@ -7,6 +7,10 @@ import index_page from "@/server/routers/index_page";
 // import proxy_list from "@/server/configs/proxy_list";
 import { runder_method } from "@/server/middlewares/render";
 
+import { UserInfoEntity } from "@/server/entitys/user_info";
+
+console.log("UserInfoEntity", UserInfoEntity);
+
 const static_cache_config = {
   "local": 0,
   "test": 1000 * 60 * 24 * 30,

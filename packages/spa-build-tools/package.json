@@ -49,12 +49,10 @@
     "html-webpack-plugin": "5.5.0",
     "inquirer": "^7.3.3",
     "jsonfile": "^6.0.1",
-    "koa-proxies": "0.12.2",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
     "mini-css-extract-plugin": "^1.6.2",
     "module-alias": "^2.2.2",
-    "open": "8.4.0",
     "path-browserify": "1.0.1",
     "path-exists": "^4.0.0",
     "postcss": "^8.4.11",
@@ -70,6 +68,7 @@
     "stream-browserify": "3.0.0",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "5.3.3",
+    "ts-loader": "9.4.2",
     "webpack": "^5.70.0",
     "webpack-assets-manifest": "5.1.0",
     "webpack-bundle-analyzer": "4.5.0",
@@ -79,6 +78,8 @@
   "bin": "./.bin/index.js",
   "gitHead": "842276f429b4754e56a42440e0eadd75099b7802",
   "devDependencies": {
-    "sass": "1.54.2"
+    "@types/node": "18.14.1",
+    "sass": "1.54.2",
+    "typescript": "4.9.5"
   }
 }
