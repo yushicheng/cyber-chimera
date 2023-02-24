@@ -1,6 +1,6 @@
 {
   "name": "@cyber-chimera/spa-build-tools",
-  "version": "7.2.0",
+  "version": "8.0.0",
   "description": "电子奇美拉single-page-application开发工具",
   "main": "./dist/index.js",
   "scripts": {
