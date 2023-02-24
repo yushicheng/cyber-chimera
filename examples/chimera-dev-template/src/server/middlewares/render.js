@@ -7,11 +7,14 @@ export async function runder_method(context, next) {
   if (context.path.match("api")) {
     try {
       const return_values = await next();
+      console.log("return_values", return_values);
       context.response.status = 200;
-      context.response.body = { code: 0, data: return_values, message: "ok" };
+      context.response.body = { code: 0, data: return_values || null, message: "ok" };
+      return false;
     } catch (error) {
       context.response.status = 200;
-      context.response.body = { code: 0, data: null, message: JSON.stringify(error) };;
+      context.response.body = { code: 10000, data: null, message: error.message };
+      return false;
     };
   } else {
     try {
@@ -32,9 +35,11 @@ export async function runder_method(context, next) {
       });
       context.response.status = 200;
       context.response.body = render_html;
+      return false;
     } catch (error) {
       console.log(error);
       context.response.body = `<pre>${error.message}</pre>`;
+      return false;
     };
   };
 };
