@@ -2,14 +2,15 @@
 import { server_render } from "./render.template";
 
 export async function runder_method(context, next) {
-  const { API_TOKEN } = context.cookie = {};
-  console.log("当前身份令牌==>", API_TOKEN);
   if (context.path.match("api")) {
     try {
       const return_values = await next();
-      console.log("return_values", return_values);
+      if (!return_values) {
+        context.response.status = 404;
+        return false;
+      };
       context.response.status = 200;
-      context.response.body = { code: 0, data: return_values || null, message: "ok" };
+      context.response.body = { code: 0, data: return_values, message: "ok" };
       return false;
     } catch (error) {
       context.response.status = 200;
