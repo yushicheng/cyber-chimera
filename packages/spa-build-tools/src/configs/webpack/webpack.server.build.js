@@ -26,12 +26,11 @@ export default function get_webpack_server_build_config({ title, bundle_analyzer
     entry: server_entry,
     output: {
       publicPath,
-      library: { type: "commonjs" },
       path: output_path,
       filename: "server.js"
     },
     optimization: {
-      minimize: true
+      minimize: false
     },
     module: {
       rules: [
