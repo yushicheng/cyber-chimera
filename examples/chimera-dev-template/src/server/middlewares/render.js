@@ -43,7 +43,7 @@ export async function runder_method(context, next) {
       };
     } catch (error) {
       console.log(error);
-      context.response.body = `<pre>${error.message}</pre>`;
+      await context.throw(error, 500);
       return false;
     };
   };
