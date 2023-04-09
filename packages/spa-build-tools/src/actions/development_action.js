@@ -36,7 +36,7 @@ export async function development_action() {
 
   compiler_events.on("server-complate", () => {
     fork_task.forEach((current_fork) => current_fork.kill());
-    fork_task.push(fork(path.resolve(dev_output_path, `./server.js`)));
+    fork_task.push(fork(path.resolve(process.cwd(), `./server/server.js`)));
   });
 
   const fork_task = [];
@@ -73,14 +73,14 @@ export async function development_action() {
   });
 
   chokidar.watch([
-    path.resolve(process.cwd(), "./src/"),
+    path.resolve(process.cwd(), "./.temp/"),
     path.resolve(process.cwd(), "./server/"),
   ], {
     ignoreInitial: true,
     persistent: true
   }).on("all", () => {
     fork_task.forEach((current_fork) => current_fork.kill());
-    fork_task.push(fork(dev_output_path, `./server.js`));
+    fork_task.push(fork(path.resolve(process.cwd(), `./server/server.js`)));
   });
 
 };

@@ -1,5 +1,5 @@
 import Router from "@koa/router";
-import get_initial_value from "@/server/services/get_initial_value";
+import get_initial_value from "@/services/get_initial_value";
 
 const router = new Router();
 
