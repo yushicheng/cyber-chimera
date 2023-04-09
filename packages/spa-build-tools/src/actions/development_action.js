@@ -9,14 +9,22 @@ import pathExists from "path-exists";
 import { fork } from "child_process";
 import { EventEmitter } from "events";
 
-import get_webpack_server_dev_config from "@/configs/webpack/webpack.server.dev";
-import get_webpack_client_dev_config from "@/configs/webpack/webpack.client.dev";
+import { create_src_render } from "@/methods/create_src_render";
+import { create_csr_template } from "@/methods/create_csr_template";
+import { create_ssr_template } from "@/methods/create_ssr_template";
+import get_webpack_server_dev_config from "@/configs/webpack/webpack.ssr.dev";
+import get_webpack_client_dev_config from "@/configs/webpack/webpack.csr.dev";
 import get_computed_config from "@/utils/get_computed_config";
 
 export const runtime_config_option = new Option("-c,--config <string>").default("./chimera.config.js");
 
 export async function development_action() {
   const { ...other_config } = await get_computed_config();
+
+  /** 创建src/.render/文件夹 **/
+  await create_src_render();
+  await create_csr_template();
+  await create_ssr_template();
 
   const dev_output_path = path.resolve(process.cwd(), "./.temp/");
 
@@ -65,15 +73,14 @@ export async function development_action() {
   });
 
   chokidar.watch([
-    path.resolve(process.cwd(), "./src/client/"),
-    path.resolve(process.cwd(), "./src/server/"),
-    path.resolve(process.cwd(), "./src/source/")
+    path.resolve(process.cwd(), "./src/"),
+    path.resolve(process.cwd(), "./server/"),
   ], {
     ignoreInitial: true,
     persistent: true
   }).on("all", () => {
     fork_task.forEach((current_fork) => current_fork.kill());
-    fork_task.push(fork(path.resolve(dev_output_path, `./server.js`)));
+    fork_task.push(fork(dev_output_path, `./server.js`));
   });
 
 };

@@ -7,13 +7,13 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import WebpackAssetsManifest from "webpack-assets-manifest";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
-import create_webpack_basic_config from "@/configs/webpack/webpack.basic";
+import create_webpack_basic_config from "@/configs/webpack/webpack.csr.basic";
 import css_loader_config from "@/configs/rules/css_loader_config";
 import less_loader_config from "@/configs/rules/less_loader_config";
 import scss_loader_config from "@/configs/rules/scss_loader_config";
 import file_loader_config from "@/configs/rules/file_loader_config";
 
-export default function get_webpack_client_build_config({ title, hash, define, resolve, copy, output_path, publicPath, bundle_analyzer, client_entry }) {
+export default function get_webpack_client_build_config({ title, hash, define, resolve, copy, output_path, publicPath, bundle_analyzer }) {
   return merge(create_webpack_basic_config({
     define: {
       "process.env.isServer": false,
@@ -24,7 +24,6 @@ export default function get_webpack_client_build_config({ title, hash, define, r
   }), { resolve }, {
     mode: "production",
     devtool: false,
-    entry: client_entry,
     output: {
       publicPath: publicPath,
       path: output_path,

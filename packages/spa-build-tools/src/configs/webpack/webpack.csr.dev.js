@@ -5,13 +5,13 @@ import WebpackCopyPlugin from "copy-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import WebpackAssetsManifest from "webpack-assets-manifest";
 
-import create_webpack_basic_config from "@/configs/webpack/webpack.basic";
+import create_webpack_basic_config from "@/configs/webpack/webpack.csr.basic";
 import css_loader_config from "@/configs/rules/css_loader_config";
 import less_loader_config from "@/configs/rules/less_loader_config";
 import scss_loader_config from "@/configs/rules/scss_loader_config";
 import file_loader_config from "@/configs/rules/file_loader_config";
 
-export default function get_webpack_client_dev_config({ title, define, resolve, output_path, publicPath, client_entry }) {
+export default function get_webpack_client_dev_config({ title, define, resolve, output_path, publicPath }) {
 
   return merge(create_webpack_basic_config({
     define: {
@@ -22,7 +22,6 @@ export default function get_webpack_client_dev_config({ title, define, resolve, 
     },
   }), { resolve }, {
     mode: "development",
-    entry: client_entry,
     output: {
       publicPath,
       path: output_path,

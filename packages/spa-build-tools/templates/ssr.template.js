@@ -1,13 +1,9 @@
 /* eslint-disable react/no-danger */
 import React from "react";
 import ReactDOM from "react-dom/server";
-
-import { I18nextProvider } from "react-i18next";
 import { StaticRouter } from "react-router-dom/server";
 
-import init18n from "@/source/init18n";
-import MainBlock from "@/source/entry";
-import { RenderContextProvider } from "@/source/context/render_context";
+import MainBlock from "@/entry";
 
 // eslint-disable-next-line no-unused-vars
 export async function server_render({ seo_option, basename, language, location, dev_inject, initial_value }) {
@@ -69,13 +65,9 @@ export async function server_render({ seo_option, basename, language, location, 
       </head>
       <body>
         <div id="root">
-          <I18nextProvider i18n={init18n(language)}>
-            <StaticRouter basename={basename} location={location}>
-              <RenderContextProvider initial_value={initial_value}>
-                <MainBlock />
-              </RenderContextProvider>
-            </StaticRouter>
-          </I18nextProvider>
+          <StaticRouter basename={basename} location={location}>
+            <MainBlock />
+          </StaticRouter>
         </div>
         <script src={`/${manifest_content["vendors.js"]}`} />
         <script src={`/${manifest_content["main.js"]}`} />

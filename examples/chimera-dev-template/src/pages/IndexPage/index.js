@@ -2,8 +2,8 @@
 import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
-import useInitalValue from "@/source/hooks/useInitalValue";
-import ShowResponsive from "@/source/components/ShowResponsive";
+import useInitalValue from "@/hooks/useInitalValue";
+import ShowResponsive from "@/components/ShowResponsive";
 
 import css from "./style.less";
 import image from "./v2-5c21be97780f6be9aeb5bb2d01ae2470_r.jpg";

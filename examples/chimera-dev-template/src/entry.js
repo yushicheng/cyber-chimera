@@ -1,10 +1,10 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import BasicLayout from "@/source/layouts/basic_layouts";
-import IndexPage from "@/source/pages/IndexPage";
+import BasicLayout from "@/layouts/basic_layouts";
+import IndexPage from "@/pages/IndexPage";
 
-import "@/source/global.less";
+import "@/global.less";
 
 
 export default () => (
