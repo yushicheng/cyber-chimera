@@ -2,16 +2,15 @@ import path from "path";
 import webpack from "webpack";
 import { fromPairs } from "lodash";
 
-import { dev_render_template_dir } from "@/configs/runtime.config";
 import babel_loader_config from "@/configs/rules/babel_loader_config";
 import ts_loader_config from "@/configs/rules/ts_loader_config";
 
-export default function create_webpack_basic_config({ title, define }) {
+export default function create_webpack_basic_config({ entry, define }) {
   const define_pairs = Object.keys(define).map((keyname) => [keyname, JSON.stringify(define[keyname])]);
   const define_object = fromPairs(define_pairs);
   return {
+    entry,
     devtool: "source-map",
-    entry: path.resolve(dev_render_template_dir, "./ssr.entry.js"),
     resolve: {
       extensions: [".ts", ".tsx", ".js", ".jsx"],
       alias: {

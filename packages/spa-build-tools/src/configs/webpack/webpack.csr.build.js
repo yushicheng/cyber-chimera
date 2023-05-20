@@ -13,19 +13,22 @@ import less_loader_config from "@/configs/rules/less_loader_config";
 import scss_loader_config from "@/configs/rules/scss_loader_config";
 import file_loader_config from "@/configs/rules/file_loader_config";
 
-export default function get_webpack_client_build_config({ title, hash, define, resolve, copy, output_path, publicPath, bundle_analyzer }) {
-  return merge(create_webpack_basic_config({
+export default function get_webpack_client_build_config({ entry, hash, define, resolve, copy, output_path, publicPath, bundle_analyzer }) {
+
+  const basic_config = create_webpack_basic_config({
+    entry,
     define: {
       "process.env.isServer": false,
       "process.env.NODE_ENV": "production",
-      "process.env.RUNTIME_CONFIG": { title },
       ...define
     },
-  }), { resolve }, {
+  });
+
+  return merge(basic_config, { resolve }, {
     mode: "production",
     devtool: false,
     output: {
-      publicPath: publicPath,
+      publicPath,
       path: output_path,
       filename: `[name]${hash ? ".[contenthash]" : ""}.js`
     },
