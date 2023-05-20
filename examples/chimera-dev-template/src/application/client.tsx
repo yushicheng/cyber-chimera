@@ -7,6 +7,8 @@ import { Application } from "@/application/application";
 
 const container = document.getElementById("root");
 
+console.log(process.env.NODE_ENV);
+
 ReactDOM.render((
   <BrowserRouter>
     <Application />

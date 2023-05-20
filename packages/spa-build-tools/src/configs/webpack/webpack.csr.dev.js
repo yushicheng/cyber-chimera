@@ -17,7 +17,7 @@ export default function get_webpack_client_dev_config({ entry, define, resolve, 
     entry,
     define: {
       "process.env.isServer": false,
-      "process.env.NODE_ENV": "development",
+      "process.env.NODE_ENV": process.env.NODE_ENV,
       ...define
     },
   });

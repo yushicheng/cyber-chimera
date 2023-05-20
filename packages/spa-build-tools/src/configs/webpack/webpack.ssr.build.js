@@ -16,7 +16,7 @@ export default function get_webpack_server_build_config({ entry, bundle_analyzer
     entry,
     define: {
       "process.env.isServer": true,
-      "process.env.NODE_ENV": "production",
+      "process.env.NODE_ENV": process.env.NODE_ENV,
       ...define
     }
   });
@@ -29,9 +29,6 @@ export default function get_webpack_server_build_config({ entry, bundle_analyzer
       publicPath,
       path: output_path,
       filename: "server.js"
-    },
-    optimization: {
-      minimize: false
     },
     module: {
       rules: [

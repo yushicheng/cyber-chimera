@@ -19,7 +19,7 @@ export default function get_webpack_client_build_config({ entry, hash, define, r
     entry,
     define: {
       "process.env.isServer": false,
-      "process.env.NODE_ENV": "production",
+      "process.env.NODE_ENV": process.env.NODE_ENV,
       ...define
     },
   });

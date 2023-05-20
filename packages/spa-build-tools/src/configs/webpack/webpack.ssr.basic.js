@@ -18,6 +18,9 @@ export default function create_webpack_basic_config({ entry, define }) {
         "@": path.resolve(process.cwd(), "./src/")
       }
     },
+    optimization: {
+      nodeEnv: false
+    },
     plugins: [
       new webpack.DefinePlugin(define_object)
     ],

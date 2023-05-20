@@ -5,10 +5,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env CHIMERA_RUNTIME=local spa-build-tools dev",
-    "build": "cross-env CHIMERA_RUNTIME=local spa-build-tools build",
-    "build:test": "cross-env CHIMERA_RUNTIME=test spa-build-tools build",
-    "build:prod": "cross-env CHIMERA_RUNTIME=prod spa-build-tools build"
+    "dev": "cross-env NODE_ENV=local spa-build-tools dev",
+    "build": "cross-env NODE_ENV=test spa-build-tools build",
+    "build:test": "cross-env NODE_ENV=test spa-build-tools build",
+    "build:prod": "cross-env NODE_ENV=prod spa-build-tools build"
   },
   "keywords": [],
   "author": "",

@@ -7,6 +7,8 @@ import index_page from "@/routers/index_page";
 
 const app = new Koa();
 
+console.log("process.env.NODE_ENV", process.env.NODE_ENV);
+
 /** 开发环境静态资源目录 **/
 app.use(koa_static(path.resolve(process.cwd(), "./.temp/"), {
   index: false,

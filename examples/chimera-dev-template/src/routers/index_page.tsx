@@ -11,8 +11,9 @@ import { Application } from "@/application/application";
 const router = new Router();
 
 const mainfast_filepath = {
-  "development": path.resolve(process.cwd(), "./.temp/manifest.json"),
-  "production": path.resolve(process.cwd(), "./assets/manifest.json")
+  "local": path.resolve(process.cwd(), "./.temp/manifest.json"),
+  "test": path.resolve(process.cwd(), "./assets/manifest.json"),
+  "prod": path.resolve(process.cwd(), "./assets/manifest.json")
 }[process.env.NODE_ENV];
 
 router.get("/", async (context) => {

@@ -16,15 +16,15 @@ export async function development_action() {
   const { client_entry, server_entry, ...other_config } = await get_computed_config();
 
   /** 创建开发环境临时文件夹.temp **/
-  const dev_output_path = path.resolve(process.cwd(), "./.temp/");
-  if (await pathExists(dev_output_path)) {
-    await promisify(fs.rm)(dev_output_path, { recursive: true });
+  const output_path = path.resolve(process.cwd(), "./.temp/");
+  if (await pathExists(output_path)) {
+    await promisify(fs.rm)(output_path, { recursive: true });
   };
 
   /** 合并出客户端的配置 **/
-  const client_dev_config = get_webpack_client_dev_config({ entry: client_entry, ...other_config, output_path: dev_output_path });
+  const client_dev_config = get_webpack_client_dev_config({ entry: client_entry, ...other_config, output_path });
   /** 合并出服务端的配置 **/
-  const server_dev_config = get_webpack_server_dev_config({ entry: server_entry, ...other_config, output_path: dev_output_path });
+  const server_dev_config = get_webpack_server_dev_config({ entry: server_entry, ...other_config, output_path });
 
   /** 开启客户端的监听服务 **/
   const client_dev_compiler = webpack(client_dev_config);
@@ -47,7 +47,7 @@ export async function development_action() {
       console.log(error);
     } else {
       console.log(stats.toString({ colors: true }));
-      const process_task = spawn("node", [path.resolve(dev_output_path, "./server.js")], { stdio: "inherit" });
+      const process_task = spawn("node", [path.resolve(output_path, "./server.js")], { stdio: "inherit" });
       process_task_list.forEach((single_process_task) => single_process_task.kill());
       process_task_list.push(process_task);
     };
