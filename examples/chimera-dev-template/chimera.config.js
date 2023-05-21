@@ -5,9 +5,8 @@ module.exports = {
   hash: true,
   publicPath: "/",
   output_path: path.resolve(__dirname, "./assets/"),
-  title: "My Server App",
-  client_entry: path.resolve(__dirname, "./src/application/client.tsx"),
-  server_entry: path.resolve(__dirname, "./src/server.tsx"),
+  client_entry: path.resolve(__dirname, "./src/application/client.csr.tsx"),
+  server_entry: path.resolve(__dirname, "./src/server.ts"),
   define: {},
   bundle_analyzer: false
 };

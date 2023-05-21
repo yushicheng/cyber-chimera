@@ -29,6 +29,7 @@ export default function get_webpack_client_build_config({ entry, hash, define, r
     devtool: false,
     output: {
       publicPath,
+      clean: true,
       path: output_path,
       filename: `[name]${hash ? ".[contenthash]" : ""}.js`
     },

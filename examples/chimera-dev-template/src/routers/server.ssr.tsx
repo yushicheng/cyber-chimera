@@ -1,14 +1,12 @@
 import path from "path";
 import React from "react";
+import pretty from "pretty";
 import { promisify } from "util";
 import { readFile } from "jsonfile";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 
-import Router from "@koa/router";
 import { Application } from "@/application/application";
-
-const router = new Router();
 
 const mainfast_filepath = {
   "local": path.resolve(process.cwd(), "./.temp/manifest.json"),
@@ -16,9 +14,9 @@ const mainfast_filepath = {
   "prod": path.resolve(process.cwd(), "./assets/manifest.json")
 }[process.env.NODE_ENV];
 
-router.get("/", async (context) => {
+export const server_render = async (request, response) => {
   const mainfast = await promisify(readFile)(mainfast_filepath);
-  context.body = renderToString(
+  const render_content = renderToString(
     <html>
       <head>
         <meta charSet="UTF-8" />
@@ -29,7 +27,7 @@ router.get("/", async (context) => {
       </head>
       <body>
         <div id="root">
-          <StaticRouter location={context.url}>
+          <StaticRouter location={request.url}>
             <Application />
           </StaticRouter>
         </div>
@@ -38,6 +36,5 @@ router.get("/", async (context) => {
       </body>
     </html>
   );
-});
-
-export default router.routes();
+  response.send(pretty(render_content));
+};
