@@ -27,7 +27,7 @@ export default function get_webpack_server_build_config({ entry, bundle_analyzer
     mode: "production",
     output: {
       publicPath,
-      clean: true,
+      clean: false,
       path: output_path,
       filename: "server.js"
     },

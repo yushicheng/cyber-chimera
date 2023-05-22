@@ -1,4 +1,5 @@
 import webpack from "webpack";
+import { promisify } from "util";
 
 import get_webpack_server_build_config from "@/configs/webpack/webpack.ssr.build";
 import get_webpack_client_build_config from "@/configs/webpack/webpack.csr.build";
@@ -16,7 +17,7 @@ export async function build_action() {
     if (error) {
       console.log("client_error", error);
     } else {
-      console.log(stats.toString({ colors: true }));
+      stats.toString({ colors: true });
     };
   });
 
@@ -28,7 +29,8 @@ export async function build_action() {
     if (error) {
       console.log("server_error", error);
     } else {
-      console.log(stats.toString({ colors: true }));
+      stats.toString({ colors: true });
     };
   });
+
 };
