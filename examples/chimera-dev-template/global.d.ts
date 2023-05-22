@@ -23,7 +23,6 @@ declare module '*.module.styl' {
   export default classes;
 }
 
-
 declare module '*.xlsx' {
   export default string;
 }
