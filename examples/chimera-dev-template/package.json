@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "ahooks": "3.7.7",
+    "amqplib": "0.10.3",
     "antd": "5.5.0",
     "axios": "1.4.0",
     "body-parser": "1.20.1",
@@ -23,18 +24,22 @@
     "dot-prop": "5.3.0",
     "express": "4.18.2",
     "global-agent": "3.0.0",
+    "ioredis": "4.28.5",
     "jsonfile": "4.0.0",
     "jsonwebtoken": "9.0.0",
     "multer": "1.4.5-lts.1",
+    "mysql2": "3.3.1",
     "path-to-regexp": "^6.2.0",
-    "pretty": "2.0.0",
     "proxy-agent": "6.2.0",
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-responsive": "^9.0.0-beta.6",
     "react-router-dom": "^6.10.0",
+    "redis": "4.6.6",
     "ssr-window": "4.0.2",
-    "typeorm": "0.3.12"
+    "typeorm": "0.3.12",
+    "winston": "3.8.2",
+    "winston-daily-rotate-file": "4.7.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
