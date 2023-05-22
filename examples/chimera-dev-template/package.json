@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "chimera-dev-template",
-  "version": "9.0.0",
+  "version": "9.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
-    "@cyber-chimera/spa-build-tools": "^9.0.0",
+    "@cyber-chimera/spa-build-tools": "^9.1.0",
     "babel-plugin-import": "1.13.5",
     "cross-env": "7.0.3",
     "eslint": "7.5.0",
