@@ -1,6 +1,5 @@
 import path from "path";
 import React from "react";
-import pretty from "pretty";
 import { promisify } from "util";
 import { readFile } from "jsonfile";
 import { renderToString } from "react-dom/server";
@@ -14,7 +13,7 @@ const mainfast_filepath = {
   "prod": path.resolve(process.cwd(), "./assets/manifest.json")
 }[process.env.NODE_ENV];
 
-export const server_render = async (request, response) => {
+export const render_index = async (request, response) => {
   const mainfast = await promisify(readFile)(mainfast_filepath);
   const render_content = renderToString(
     <html>
@@ -36,5 +35,5 @@ export const server_render = async (request, response) => {
       </body>
     </html>
   );
-  response.send(pretty(render_content));
+  response.send(render_content);
 };

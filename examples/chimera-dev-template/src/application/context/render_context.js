@@ -10,3 +10,7 @@ export function RenderContextProvider(props) {
     </RenderContext.Provider>
   )
 };
+
+RenderContextProvider.defaultProps = {
+  initial_value: {}
+};
