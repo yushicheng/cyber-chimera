@@ -14,7 +14,7 @@ const mainfast_filepath = {
   "prod": path.resolve(process.cwd(), "./assets/manifest.json")
 }[process.env.NODE_ENV];
 
-export async function render_content({ title = "Frank.leo的磁力站", request_url, initial_value }) {
+export async function render_content({ title = "默认标题", request_url, initial_value }) {
   const mainfast = await promisify(readFile)(mainfast_filepath);
   const content_string = renderToString(
     <html>
