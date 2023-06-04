@@ -11,10 +11,11 @@ import less_loader_config from "@/configs/rules/less_loader_config";
 import scss_loader_config from "@/configs/rules/scss_loader_config";
 import file_loader_config from "@/configs/rules/file_loader_config";
 
-export default function get_webpack_client_dev_config({ entry, define, resolve, output_path, publicPath }) {
+export default function get_webpack_client_dev_config({ entry, define, externals, resolve, output_path, publicPath }) {
 
   const basic_config = create_webpack_basic_config({
     entry,
+    externals,
     define: {
       "process.env.isServer": false,
       "process.env.NODE_ENV": process.env.NODE_ENV,
