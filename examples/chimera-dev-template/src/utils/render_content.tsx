@@ -31,7 +31,7 @@ export async function render_content({ title = "默认标题", request_url, init
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{title}</title>
-        <link href="favicon.ico" />
+        <link href="/favicon.ico" />
         <link rel="stylesheet" href={`/${mainfast["main.css"]}`} />
         <script dangerouslySetInnerHTML={{ __html: `window.initial_value=${JSON.stringify(initial_value, null, "")}` }}></script>
       </head>
