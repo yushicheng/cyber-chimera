@@ -7,8 +7,8 @@ import { Option } from "commander";
 import pathExists from "path-exists";
 
 import get_computed_config from "@/utils/get_computed_config";
-import get_webpack_server_dev_config from "@/configs/webpack/webpack.ssr.dev";
-import get_webpack_client_dev_config from "@/configs/webpack/webpack.csr.dev";
+import get_webpack_server_dev_config from "@/configs/server/webpack.ssr.dev";
+import get_webpack_client_dev_config from "@/configs/client/webpack.csr.dev";
 
 export const runtime_config_option = new Option("-c,--config <string>").default("./chimera.config.js");
 
@@ -47,8 +47,8 @@ export async function development_action() {
       console.log(error);
     } else {
       console.log(stats.toString({ colors: true }));
-      const process_task = spawn("node", [path.resolve(output_path, "./server.js")], { stdio: "inherit" });
       process_task_list.forEach((single_process_task) => single_process_task.kill());
+      const process_task = spawn("node", [path.resolve(output_path, "./server.js")], { stdio: "inherit" });
       process_task_list.push(process_task);
     };
   });

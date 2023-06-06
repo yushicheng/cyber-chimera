@@ -1,23 +1,19 @@
 import path from "path";
-import WebpackBar from "webpackbar";
 import { merge } from "webpack-merge";
-import TerserPlugin from "terser-webpack-plugin";
 import WebpackCopyPlugin from "copy-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import WebpackAssetsManifest from "webpack-assets-manifest";
-import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
-import create_webpack_basic_config from "@/configs/webpack/webpack.csr.basic";
+import create_webpack_basic_config from "@/configs/client/webpack.csr.basic";
 import css_loader_config from "@/configs/rules/css_loader_config";
 import less_loader_config from "@/configs/rules/less_loader_config";
 import scss_loader_config from "@/configs/rules/scss_loader_config";
 import file_loader_config from "@/configs/rules/file_loader_config";
 
-export default function get_webpack_client_build_config({ entry, hash, define, resolve, externals, output_path, publicPath, bundle_analyzer }) {
+export default function get_webpack_client_dev_config({ entry, define, output_path, publicPath }) {
 
   const basic_config = create_webpack_basic_config({
     entry,
-    externals,
     define: {
       "process.env.isServer": false,
       "process.env.NODE_ENV": process.env.NODE_ENV,
@@ -25,32 +21,24 @@ export default function get_webpack_client_build_config({ entry, hash, define, r
     },
   });
 
-  return merge(basic_config, { resolve }, {
-    mode: "production",
-    devtool: false,
+  return merge(basic_config, {
+    mode: "development",
     output: {
       publicPath,
-      clean: true,
-      path: output_path,
-      filename: `[name]${hash ? ".[contenthash]" : ""}.js`
+      clean: false,
+      path: path.resolve(output_path, "./application/"),
+      filename: "[name].js"
     },
     optimization: {
       splitChunks: {
         cacheGroups: {
           commons: {
             test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all'
+            name: "vendors",
+            chunks: "all"
           }
         }
-      },
-      minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          parallel: true,
-          extractComments: true,
-        })
-      ]
+      }
     },
     module: {
       rules: [
@@ -61,21 +49,16 @@ export default function get_webpack_client_build_config({ entry, hash, define, r
       ]
     },
     plugins: [
+      new WebpackCopyPlugin({
+        patterns: [{ from: path.resolve(process.cwd(), "./public/"), to: path.resolve(output_path, "./application/") }]
+      }),
       new WebpackAssetsManifest({
         output: path.resolve(output_path, "./manifest.json")
       }),
-      new WebpackBar({ name: "building-client" }),
-      bundle_analyzer ? new BundleAnalyzerPlugin({
-        analyzerPort: "auto",
-        generateStatsFile: true
-      }) : null,
-      new WebpackCopyPlugin({
-        patterns: [{ from: path.resolve(process.cwd(), "./public/"), to: output_path }]
-      }),
       new MiniCssExtractPlugin({
         linkType: "text/css",
-        filename: `[name]${hash ? ".[contenthash]" : ""}.css`
+        filename: "[name].css"
       })
-    ].filter(Boolean)
+    ]
   })
 };

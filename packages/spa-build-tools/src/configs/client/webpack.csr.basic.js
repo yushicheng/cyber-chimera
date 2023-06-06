@@ -1,6 +1,8 @@
 import path from "path";
 import webpack from "webpack";
 import { fromPairs } from "lodash";
+import WebpackBar from "webpackbar";
+import NodePolyfillPlugin from "node-polyfill-webpack-plugin";
 
 import babel_loader_config from "@/configs/rules/babel_loader_config";
 import ts_loader_config from "@/configs/rules/ts_loader_config";
@@ -23,6 +25,8 @@ export default function create_webpack_basic_config({ entry, define, externals }
       nodeEnv: false
     },
     plugins: [
+      new NodePolyfillPlugin(),
+      new WebpackBar({ name: "编译客户端" }),
       new webpack.DefinePlugin(define_object)
     ],
     module: {

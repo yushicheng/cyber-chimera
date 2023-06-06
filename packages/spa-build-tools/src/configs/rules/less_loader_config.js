@@ -12,13 +12,13 @@ export default ({ isServer }) => [{
       modules: {
         exportOnlyLocals: isServer,
         mode: (resourcePath) => {
-          if (/\.(global)/.test(resourcePath)) {
-            return "global";
+          if (/\.(module)/.test(resourcePath)) {
+            return "local";
           }
           if (/(node_modules)/.test(resourcePath)) {
             return "global";
           };
-          return "local";
+          return "global";
         }
       },
       sourceMap: true

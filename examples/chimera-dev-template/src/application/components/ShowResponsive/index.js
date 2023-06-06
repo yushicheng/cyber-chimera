@@ -3,7 +3,7 @@ import React from "react";
 // import classnames from "classnames";
 // import propTypes from "prop-types";
 
-import css from "./style.scss";
+import css from "./style.module.scss";
 
 import useResponsive from "@/application/hooks/useResponsive";
 

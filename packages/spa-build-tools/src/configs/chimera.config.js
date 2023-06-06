@@ -7,13 +7,5 @@ module.exports = {
   output_path: path.resolve(process.cwd(), "./assets/"),
   define: {},
   proxy: {},
-  resolve: {
-    fallback: {
-      "url": require.resolve("url"),
-      "path": require.resolve("path-browserify"),
-      "crypto": require.resolve("crypto-browserify"),
-      "stream": require.resolve("stream-browserify")
-    }
-  },
   bundle_analyzer: false
 };

@@ -5,7 +5,7 @@ import { Outlet, useLocation } from "react-router-dom";
 // import useInitalValue from "@/application/hooks/useInitalValue";
 import ShowResponsive from "@/application/components/ShowResponsive";
 
-import css from "./style.less";
+import css from "./style.module.less";
 import image from "./v2-5c21be97780f6be9aeb5bb2d01ae2470_r.jpg";
 
 // import classnames from "classnames";
