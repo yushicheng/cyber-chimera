@@ -29,7 +29,7 @@ export async function render_content({ title = "默认标题", request_url, init
       <head>
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no;" />
         <title>{title}</title>
         <link href="/favicon.ico" />
         <link rel="stylesheet" href={`/${mainfast["main.css"]}`} />
