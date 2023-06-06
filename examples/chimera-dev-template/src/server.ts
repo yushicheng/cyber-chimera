@@ -12,7 +12,7 @@ const app = express();
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-/** 开发环境静态资源目录 **/
+/** 静态资源目录 **/
 app.get("/", render_index);
 app.use(express.static(path.resolve(path.dirname(__filename), "./application/")));
 
