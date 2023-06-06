@@ -46,8 +46,8 @@ export async function render_content({ title = "默认标题", request_url, init
             </StaticRouter>
           </RenderContextProvider>
         </div>
-        <script src={mainfast["vendors.js"]}></script>
-        <script src={mainfast["main.js"]}></script>
+        <script src={`/${mainfast["vendors.js"]}`}></script>
+        <script src={`/${mainfast["main.js"]}`}></script>
       </body>
     </html>
   );
