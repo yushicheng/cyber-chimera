@@ -25,15 +25,15 @@ export default function create_webpack_basic_config({ entry, define }) {
     optimization: {
       nodeEnv: false
     },
-    plugins: [
-      new WebpackBar({ name: "编译服务端" }),
-      new webpack.DefinePlugin(define_object)
-    ],
     module: {
       rules: [
         ...babel_loader_config,
         ...ts_loader_config
       ]
-    }
+    },
+    plugins: [
+      new WebpackBar({ name: "编译服务端" }),
+      new webpack.DefinePlugin(define_object)
+    ]
   }
 };

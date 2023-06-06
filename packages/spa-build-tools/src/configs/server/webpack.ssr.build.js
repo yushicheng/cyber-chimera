@@ -1,6 +1,5 @@
 import path from "path";
 import { merge } from "webpack-merge";
-import WebpackCopyPlugin from "copy-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 import create_webpack_basic_config from "@/configs/server/webpack.ssr.basic";

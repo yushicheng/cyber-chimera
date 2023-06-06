@@ -24,16 +24,16 @@ export default function create_webpack_basic_config({ entry, define, externals }
     optimization: {
       nodeEnv: false
     },
-    plugins: [
-      new NodePolyfillPlugin(),
-      new WebpackBar({ name: "编译客户端" }),
-      new webpack.DefinePlugin(define_object)
-    ],
     module: {
       rules: [
         ...babel_loader_config,
         ...ts_loader_config
       ]
-    }
+    },
+    plugins: [
+      new NodePolyfillPlugin(),
+      new WebpackBar({ name: "编译客户端" }),
+      new webpack.DefinePlugin(define_object)
+    ]
   }
 };

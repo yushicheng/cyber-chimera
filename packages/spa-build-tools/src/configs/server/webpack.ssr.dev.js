@@ -1,6 +1,4 @@
-import path from "path";
 import { merge } from "webpack-merge";
-import WebpackCopyPlugin from "copy-webpack-plugin";
 
 import create_webpack_basic_config from "@/configs/server/webpack.ssr.basic";
 import css_loader_config from "@/configs/rules/css_loader_config";
@@ -35,10 +33,6 @@ export default function get_webpack_server_dev_config({ entry, define, output_pa
         ...file_loader_config({ isServer: true })
       ]
     },
-    plugins: [
-      new WebpackCopyPlugin({
-        patterns: [{ from: path.resolve(process.cwd(), "./public/"), to: output_path }]
-      })
-    ]
+    plugins: []
   })
 }
