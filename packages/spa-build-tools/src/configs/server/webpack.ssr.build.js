@@ -13,8 +13,7 @@ export default function get_webpack_server_build_config({ entry, bundle_analyzer
   const basic_config = create_webpack_basic_config({
     entry,
     define: {
-      "process.env.isServer": true,
-      "process.env.NODE_ENV": process.env.NODE_ENV,
+      "process.env.isServer": JSON.stringify(true),
       ...define
     }
   });

@@ -15,8 +15,8 @@ export default function get_webpack_client_dev_config({ entry, define, output_pa
   const basic_config = create_webpack_basic_config({
     entry,
     define: {
-      "process.env.isServer": false,
-      "process.env.NODE_ENV": process.env.NODE_ENV,
+      "process.env.isServer": JSON.stringify(false),
+      "process.env.NODE_ENV": "window.process.env.NODE_ENV",
       ...define
     },
   });

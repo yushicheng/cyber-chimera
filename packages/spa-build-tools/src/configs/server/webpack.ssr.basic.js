@@ -8,7 +8,7 @@ import babel_loader_config from "@/configs/rules/babel_loader_config";
 import ts_loader_config from "@/configs/rules/ts_loader_config";
 
 export default function create_webpack_basic_config({ entry, define }) {
-  const define_pairs = Object.keys(define).map((keyname) => [keyname, JSON.stringify(define[keyname])]);
+  const define_pairs = Object.keys(define).map((keyname) => [keyname, define[keyname]]);
   const define_object = fromPairs(define_pairs);
   return {
     entry,
@@ -21,7 +21,10 @@ export default function create_webpack_basic_config({ entry, define }) {
         "@": path.resolve(process.cwd(), "./src/")
       }
     },
-    externals: [nodeExternals()],
+    externalsPresets: { node: true },
+    externals: [nodeExternals({
+      modulesFromFile: path.resolve(process.cwd(), "./package.json")
+    })],
     optimization: {
       nodeEnv: false
     },

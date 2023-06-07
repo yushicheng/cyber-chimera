@@ -7,8 +7,8 @@ import NodePolyfillPlugin from "node-polyfill-webpack-plugin";
 import babel_loader_config from "@/configs/rules/babel_loader_config";
 import ts_loader_config from "@/configs/rules/ts_loader_config";
 
-export default function create_webpack_basic_config({ entry, define, externals }) {
-  const define_pairs = Object.keys(define).map((keyname) => [keyname, JSON.stringify(define[keyname])]);
+export default function create_webpack_basic_config({ entry, define }) {
+  const define_pairs = Object.keys(define).map((keyname) => [keyname, define[keyname]]);
   const define_object = fromPairs(define_pairs);
   return {
     entry,
@@ -20,7 +20,6 @@ export default function create_webpack_basic_config({ entry, define, externals }
         "@": path.resolve(process.cwd(), "./src/")
       }
     },
-    externals,
     optimization: {
       nodeEnv: false
     },

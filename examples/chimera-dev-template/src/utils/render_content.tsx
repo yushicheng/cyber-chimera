@@ -1,4 +1,3 @@
-import fs from "fs";
 import path from "path";
 import React from "react";
 import { promisify } from "util";
@@ -9,7 +8,7 @@ import { StaticRouter } from "react-router-dom/server";
 import { RenderContextProvider } from "@/application/context/render_context";
 import { Application } from "@/application/application";
 
-let mainfast = {};
+let mainfast = null;
 
 const mainfast_filepath = {
   "local": path.resolve(process.cwd(), "./.temp/manifest.json"),
@@ -17,23 +16,22 @@ const mainfast_filepath = {
   "prod": path.resolve(process.cwd(), "./assets/manifest.json")
 }[process.env.NODE_ENV];
 
-export async function initial_render_content() {
-  mainfast = await promisify(readFile)(mainfast_filepath);
-};
-
 
 export async function render_content({ title = "默认标题", request_url, initial_value }) {
-
+  if (!mainfast) {
+    mainfast = await promisify(readFile)(mainfast_filepath);
+  };
   const content_string = renderToString(
     <html>
       <head>
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no;" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
         <title>{title}</title>
         <link href="/favicon.ico" />
         <link rel="stylesheet" href={`/${mainfast["main.css"]}`} />
-        <script dangerouslySetInnerHTML={{ __html: `window.initial_value=${JSON.stringify(initial_value, null, "")}` }}></script>
+        <script dangerouslySetInnerHTML={{ __html: `window.process=${JSON.stringify({ env: { NODE_ENV: process.env.NODE_ENV } })};` }}></script>
+        <script dangerouslySetInnerHTML={{ __html: `window.initial_value=${JSON.stringify(initial_value, null, "")};` }}></script>
       </head>
       <body>
         <div id="root">
