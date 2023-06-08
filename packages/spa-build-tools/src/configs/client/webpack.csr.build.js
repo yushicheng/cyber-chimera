@@ -46,6 +46,8 @@ export default function get_webpack_client_build_config({ entry, hash, define, o
         new TerserPlugin({
           parallel: true,
           extractComments: true,
+          keep_classnames: true,
+          keep_fnames: true
         })
       ]
     },

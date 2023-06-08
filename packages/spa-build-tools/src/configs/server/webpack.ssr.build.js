@@ -1,5 +1,5 @@
-import path from "path";
 import { merge } from "webpack-merge";
+import TerserPlugin from "terser-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 import create_webpack_basic_config from "@/configs/server/webpack.ssr.basic";
@@ -19,12 +19,23 @@ export default function get_webpack_server_build_config({ entry, bundle_analyzer
   });
 
   return merge(basic_config, {
-    mode: "development",
+    mode: "production",
     output: {
       publicPath,
       clean: false,
       path: output_path,
       filename: "server.js"
+    },
+    optimization: {
+      minimize: true,
+      minimizer: [new TerserPlugin({
+        parallel: true,
+        extractComments: true,
+        terserOptions: {
+          keep_classnames: true,
+          keep_fnames: true
+        }
+      })]
     },
     module: {
       rules: [
