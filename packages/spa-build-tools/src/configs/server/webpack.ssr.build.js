@@ -19,7 +19,7 @@ export default function get_webpack_server_build_config({ entry, bundle_analyzer
   });
 
   return merge(basic_config, {
-    mode: "production",
+    mode: "development",
     output: {
       publicPath,
       clean: false,
